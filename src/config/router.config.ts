@@ -19,7 +19,18 @@ export const constantRouterMap = [
       {
         name: 'login',
         path: '/auth/login',
+        meta: {
+          title: '登录',
+        },
         component: () => import('@/views/auth/login/index.vue'),
+      },
+      {
+        name: 'register',
+        path: '/auth/register',
+        meta: {
+          title: '注册',
+        },
+        component: () => import('@/views/auth/register/index.vue'),
       },
     ],
   },

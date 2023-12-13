@@ -1,10 +1,6 @@
 import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 import { ref } from 'vue'
-import {
-  constantRouterMap,
-  getAsyncRouterMap,
-  type IRouter,
-} from '@/config/router.config'
+import { constantRouterMap, getAsyncRouterMap, type IRouter } from '@/config/router.config'
 
 export const asyncRouterMap = ref<IRouter[]>([])
 

@@ -13,7 +13,10 @@ nextTick(() => {
 
 let baseURL
 const useProxy = false // 使用VITE的代理
-if (import.meta.env.MODE === 'development' && useProxy) {
+const useMock = true // 使用mock数据
+if (import.meta.env.MODE === 'development' && useMock) {
+  baseURL = import.meta.env.VITE_API_MOCK
+} else if (import.meta.env.MODE === 'development' && useProxy) {
   baseURL = import.meta.env.VITE_API_PREFIX
 } else {
   // TODO 发布时使用这行，开发时使用VITE的代理

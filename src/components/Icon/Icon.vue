@@ -10,9 +10,5 @@ defineProps({
 })
 </script>
 <template>
-  <component
-    :is="icon"
-    v-if="icon"
-    :style="{ 'font-size': `${size ? size : null}px` }"
-  />
+  <component :is="icon" v-if="icon" :style="{ 'font-size': `${size ? size : null}px` }" />
 </template>

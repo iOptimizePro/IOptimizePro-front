@@ -16,9 +16,10 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
+    "@morev/vue-transitions": "^2.3.6",
     "alova": "^2.16.0",
     "ant-design-vue": "4.x",
-    "axios": "^1.6.1",
+    "p5": "^1.9.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
     "vue": "^3.3.4",

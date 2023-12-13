@@ -8,10 +8,16 @@ import Icon from '@/components/Icon/Icon.vue'
 import router from '@/router'
 import '@/router/permission'
 import pinia from '@/stores/index'
+// 过渡动画
+import VueTransitions from '@morev/vue-transitions'
+import '@morev/vue-transitions/styles'
 
 const app = createApp(App)
 app.use(router)
 app.use(pinia)
+app.use(VueTransitions, {
+  // Plugin options (optional, described below)
+})
 app.component(Icon)
 // 注册全局图标
 Object.keys(Icons).forEach((key) => {

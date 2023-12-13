@@ -7,7 +7,9 @@ import { useUserStore } from '@/stores'
 
 declare type FormState = {
   username: string
+  email: string
   password: string
+  rePassword: string
   remember?: boolean
   code?: string
   uuid?: string
@@ -18,7 +20,9 @@ const codeUrl = ref('')
 
 const formState = reactive<FormState>({
   username: 'admin',
+  email: 'example@em.com',
   password: 'admin',
+  rePassword: 'admin',
   remember: true,
   code: '1234',
   uuid: '',
@@ -26,7 +30,9 @@ const formState = reactive<FormState>({
 
 const rules = reactive({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  email: [{ required: true, message: '请输入邮箱', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+  rePassword: [{ required: true, message: '请再次输入密码', trigger: 'blur' }],
   code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
 })
 
@@ -54,7 +60,7 @@ onError((event) => {
   getCode()
 })
 
-async function login() {
+async function register() {
   formRef.value.validate().then(() => {
     send(true)
   })
@@ -94,8 +100,24 @@ nextTick(() => {
         </a-input>
       </a-form-item>
 
+      <a-form-item label="邮箱" name="email">
+        <a-input v-model:value="formState.email" placeholder="请输入邮箱">
+          <template #prefix>
+            <Icon icon="MailOutlined" />
+          </template>
+        </a-input>
+      </a-form-item>
+
       <a-form-item label="密码" name="password">
         <a-input-password v-model:value="formState.password" placeholder="请输入密码">
+          <template #prefix>
+            <Icon icon="LockOutlined" />
+          </template>
+        </a-input-password>
+      </a-form-item>
+
+      <a-form-item label="重复密码" name="rePassword">
+        <a-input-password v-model:value="formState.rePassword" placeholder="请再次输入密码">
           <template #prefix>
             <Icon icon="LockOutlined" />
           </template>
@@ -117,13 +139,6 @@ nextTick(() => {
         </a-row>
       </a-form-item>
 
-      <div style="display: flex; justify-content: space-between; margin: 20px 0">
-        <a-form-item name="remember" no-style>
-          <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
-        </a-form-item>
-        <router-link to="register">忘记密码？</router-link>
-      </div>
-
       <a-form-item>
         <a-button
           :loading="loading"
@@ -131,11 +146,11 @@ nextTick(() => {
           html-type="submit"
           style="width: 100%"
           type="primary"
-          @click="login"
-          >登录
+          @click="register"
+          >注册
         </a-button>
         Or
-        <router-link to="register">现在注册</router-link>
+        <router-link to="login">已有账号？</router-link>
       </a-form-item>
     </a-form>
   </div>
