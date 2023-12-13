@@ -20,7 +20,8 @@ if (import.meta.env.MODE === 'development' && useMock) {
   baseURL = import.meta.env.VITE_API_PREFIX
 } else {
   // TODO 发布时使用这行，开发时使用VITE的代理
-  baseURL = import.meta.env.VITE_API_URL
+  // baseURL = import.meta.env.VITE_API_URL // TODO 现在暂时用MOCK
+  baseURL = import.meta.env.VITE_API_MOCK
 }
 
 const errCode = {

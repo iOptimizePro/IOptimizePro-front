@@ -11,7 +11,7 @@ export type LoginFormType = {
 export function loginApi(loginForm: LoginFormType) {
   // '/auth/login'
   return request.Post(
-    'https://www.fastmock.site/mock/34475c3a26f32e7b37e76af47125375f/mockApi/auth/login',
+    'auth/login',
     loginForm,
     // @ts-ignore
     { headers: { 'Content-Type': 'application/json' }, ignoreToken: true },
@@ -27,7 +27,7 @@ export type CaptchaResponse = {
 export function getCodeImgApi() {
   // '/auth/captchaImage'
   return request
-    .Get('https://www.fastmock.site/mock/34475c3a26f32e7b37e76af47125375f/mockApi/auth/captchaImage', {
+    .Get('auth/captchaImage', {
       // @ts-ignore
       ignoreToken: true,
       // 强制请求，防止缓存
