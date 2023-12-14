@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import PerlinNoise from '@/components/IBackground/PerlinNoise/PerlinNoise'
 import { onMounted } from 'vue'
+import PerlinNoise from '@/components/IBackground/PerlinNoise/PerlinNoise'
 
 const options = {
   Background: '#0a0a0a',
@@ -29,6 +29,7 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
+  background: #dddddd;
   z-index: -1;
 }
 </style>

@@ -4,10 +4,12 @@ import { useRoute, useRouter } from 'vue-router'
 import { asyncRouterMap } from '@/router'
 import Icon from '@/components/Icon/Icon.vue'
 
-const menuList = asyncRouterMap
-const route = useRoute()
-const router = useRouter()
-const selectedKeys = ref(['1'])
+const menuList = asyncRouterMap // 菜单列表
+const route = useRoute() // 路由实例
+const router = useRouter() // 路由实例
+const selectedKeys = ref(['1']) // 侧边栏选中的key
+const openDrawer = ref(false) // 移动端侧边栏
+const sideWidth = ref(240) // 侧边栏宽度
 const init = () => {
   const path = router.currentRoute.value.path
   const item = menuList.value.find((item) => item.path === path)
@@ -22,36 +24,13 @@ onMounted(() => {
 
 <template>
   <div class="basic-layout">
-    <a-layout style="min-height: 100vh">
-      <a-layout-sider :collapsible="true" theme="light">
-        <div class="logo">
-          <span>Logo</span>
-        </div>
-        <a-menu v-model:selectedKeys="selectedKeys" mode="inline">
-          <template v-for="item in menuList" :key="item.path">
-            <a-sub-menu v-if="'children' in item" :key="item.path">
-              <template #title>
-                <Icon :icon="item.meta.icon" />
-                <span>{{ item.name }}</span>
-              </template>
-              <a-menu-item v-for="subItem in item.children" :key="subItem.path">
-                <router-link :to="subItem.path">
-                  <Icon :icon="item.meta.icon" />
-                  <span>{{ subItem.name }}</span>
-                </router-link>
-              </a-menu-item>
-            </a-sub-menu>
-            <a-menu-item v-else :key="item">
-              <router-link :to="item.path">
-                <Icon :icon="item.meta.icon" />
-                <span>{{ item.name }}</span>
-              </router-link>
-            </a-menu-item>
-          </template>
-        </a-menu>
-      </a-layout-sider>
-      <a-layout>
-        <a-layout-header>
+    <a-layout class="layout">
+      <i-side v-model:selected-keys="selectedKeys" :menu-list="menuList" :side-width="sideWidth" class="inner-side" />
+      <a-layout class="inner-layout">
+        <a-layout-header class="inner-layout-header">
+          <a-button class="collapse-menu" type="text" @click="openDrawer = !openDrawer">
+            <Icon icon="MenuOutlined" />
+          </a-button>
           <span>
             <Icon :icon="route.meta?.icon as string" />
             {{ route.name }}
@@ -63,21 +42,22 @@ onMounted(() => {
         <a-layout-footer style=""> Footer</a-layout-footer>
       </a-layout>
     </a-layout>
+
+    <!--移动端侧边栏 a-drawer-->
+    <a-drawer
+      v-model:open="openDrawer"
+      :body-style="{ padding: 0 }"
+      :closable="false"
+      :width="sideWidth"
+      placement="left"
+    >
+      <i-side v-model:selected-keys="selectedKeys" :menu-list="menuList" :side-width="sideWidth" />
+    </a-drawer>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .basic-layout {
-  .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 64px;
-    margin: 16px;
-    background: rgba(205, 205, 205, 0.3);
-    color: #000;
-  }
-
   .ant-layout {
     --footer-padding: 10px;
 
@@ -95,6 +75,45 @@ onMounted(() => {
     .ant-layout-footer {
       text-align: center;
       padding: var(--footer-padding) 50px;
+    }
+  }
+
+  .layout {
+    min-height: 100vh;
+
+    .inner-side {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .inner-layout {
+      margin-left: 240px;
+
+      @media screen and (max-width: 768px) {
+        margin-left: 0;
+      }
+
+      .inner-layout-header {
+        position: relative;
+
+        .collapse-menu {
+          display: none;
+          @media screen and (max-width: 768px) {
+            display: inline-block;
+            position: absolute;
+            left: 4px;
+            top: 25%;
+          }
+        }
+      }
+    }
+  }
+
+  .mobile-drawer {
+    display: none;
+    @media screen and (max-width: 768px) {
+      display: block;
     }
   }
 }

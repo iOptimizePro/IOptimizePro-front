@@ -142,15 +142,14 @@ nextTick(() => {
       <a-form-item>
         <a-button
           :loading="loading"
-          class="login-form-button"
           html-type="submit"
-          style="width: 100%"
+          style="width: 100%; margin-bottom: 20px"
           type="primary"
           @click="register"
           >注册
         </a-button>
         Or
-        <router-link to="login">已有账号？</router-link>
+        <router-link to="/auth/login">已有账号？</router-link>
       </a-form-item>
     </a-form>
   </div>

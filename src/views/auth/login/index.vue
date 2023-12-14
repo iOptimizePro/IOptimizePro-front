@@ -121,21 +121,20 @@ nextTick(() => {
         <a-form-item name="remember" no-style>
           <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
         </a-form-item>
-        <router-link to="register">忘记密码？</router-link>
+        <router-link to="/auth/register">忘记密码？</router-link>
       </div>
 
       <a-form-item>
         <a-button
           :loading="loading"
-          class="login-form-button"
           html-type="submit"
-          style="width: 100%"
+          style="width: 100%; margin-bottom: 20px"
           type="primary"
           @click="login"
           >登录
         </a-button>
         Or
-        <router-link to="register">现在注册</router-link>
+        <router-link to="/auth/register">现在注册</router-link>
       </a-form-item>
     </a-form>
   </div>
