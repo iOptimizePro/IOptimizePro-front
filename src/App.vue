@@ -15,7 +15,11 @@ nextTick(() => {
 
 <template>
   <a-config-provider :locale="zhCN" :theme="themeConfig">
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition-fade mode="out-in">
+        <component :is="Component" />
+      </transition-fade>
+    </router-view>
   </a-config-provider>
 </template>
 

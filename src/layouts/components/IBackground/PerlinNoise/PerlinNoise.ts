@@ -80,7 +80,7 @@ export default class PerlinNoise {
 
       this.timer = setInterval(() => {
         p.resetParticles()
-      }, 15000)
+      }, 60000)
     }
 
     p.draw = () => {

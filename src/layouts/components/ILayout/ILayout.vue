@@ -2,7 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { asyncRouterMap } from '@/router'
-import Icon from '@/components/Icon/Icon.vue'
+import ISide from '@/layouts/components/ISide/ISide.vue'
+import IHeader from '@/layouts/components/IHeader/IHeader.vue'
 
 const menuList = asyncRouterMap // 菜单列表
 const route = useRoute() // 路由实例
@@ -10,6 +11,7 @@ const router = useRouter() // 路由实例
 const selectedKeys = ref(['1']) // 侧边栏选中的key
 const openDrawer = ref(false) // 移动端侧边栏
 const sideWidth = ref(240) // 侧边栏宽度
+const menuCollapsed = ref(false)
 const init = () => {
   const path = router.currentRoute.value.path
   const item = menuList.value.find((item) => item.path === path)
@@ -25,17 +27,16 @@ onMounted(() => {
 <template>
   <div class="basic-layout">
     <a-layout class="layout">
-      <i-side v-model:selected-keys="selectedKeys" :menu-list="menuList" :side-width="sideWidth" class="inner-side" />
+      <i-side
+        v-model:collapsed="menuCollapsed"
+        v-model:selected-keys="selectedKeys"
+        :collapsible="true"
+        :menu-list="menuList"
+        :side-width="sideWidth"
+        class="inner-side"
+      />
       <a-layout class="inner-layout">
-        <a-layout-header class="inner-layout-header">
-          <a-button class="collapse-menu" type="text" @click="openDrawer = !openDrawer">
-            <Icon icon="MenuOutlined" />
-          </a-button>
-          <span>
-            <Icon :icon="route.meta?.icon as string" />
-            {{ route.name }}
-          </span>
-        </a-layout-header>
+        <i-header v-model:menu-collapsed="menuCollapsed" v-model:open-drawer="openDrawer" />
         <a-layout-content>
           <slot></slot>
         </a-layout-content>
@@ -51,7 +52,7 @@ onMounted(() => {
       :width="sideWidth"
       placement="left"
     >
-      <i-side v-model:selected-keys="selectedKeys" :menu-list="menuList" :side-width="sideWidth" />
+      <i-side v-model:selected-keys="selectedKeys" :collapsible="false" :menu-list="menuList" :side-width="sideWidth" />
     </a-drawer>
   </div>
 </template>
@@ -88,24 +89,8 @@ onMounted(() => {
     }
 
     .inner-layout {
-      margin-left: 240px;
-
       @media screen and (max-width: 768px) {
         margin-left: 0;
-      }
-
-      .inner-layout-header {
-        position: relative;
-
-        .collapse-menu {
-          display: none;
-          @media screen and (max-width: 768px) {
-            display: inline-block;
-            position: absolute;
-            left: 4px;
-            top: 25%;
-          }
-        }
       }
     }
   }
