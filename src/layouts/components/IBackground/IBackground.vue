@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import PerlinNoise from '@/components/IBackground/PerlinNoise/PerlinNoise'
+import PerlinNoise from '@/layouts/components/IBackground/PerlinNoise/PerlinNoise'
 
 const options = {
   Background: '#0a0a0a',

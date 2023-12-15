@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
+import IMenu from '@/layouts/components/IMenu/IMenu.vue'
 
 const emit = defineEmits(['update:selectedKeys'])
 const props = defineProps<{

@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import IBackground from '@/components/IBackground/IBackground.vue'
+import IBackground from '@/layouts/components/IBackground/IBackground.vue'
 import { computed } from 'vue'
 import router from '@/router'
 

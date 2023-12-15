@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { asyncRouterMap } from '@/router'
-import Icon from '@/components/Icon/Icon.vue'
+import ISide from '@/layouts/components/ISide/ISide.vue'
 
 const menuList = asyncRouterMap // 菜单列表
 const route = useRoute() // 路由实例

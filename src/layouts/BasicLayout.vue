@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import layout from '@/components/Layout/Layout.vue'
+import ILayout from '@/layouts/components/ILayout/ILayout.vue'
 </script>
 <template>
-  <layout>
+  <i-layout>
     <router-view />
-  </layout>
+  </i-layout>
 </template>
 
 <style lang="scss" scoped></style>
