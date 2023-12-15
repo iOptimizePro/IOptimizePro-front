@@ -13,7 +13,7 @@ const propsSelectedKeys = computed({
 </script>
 
 <template>
-  <a-menu v-model:selectedKeys="propsSelectedKeys" mode="inline">
+  <a-menu v-model:selectedKeys="propsSelectedKeys" :inline-indent="15" mode="inline">
     <!-- 或者使用 mode="inline" -->
     <template v-for="item in menuList" :key="item.path">
       <a-sub-menu v-if="'children' in item" :key="item.path">

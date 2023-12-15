@@ -43,6 +43,9 @@ const currentRouterComp = computed(() => {
     margin-left: auto;
     margin-right: auto;
     background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
     @media screen and (max-width: 768px) {
       grid-template-columns: 1fr;
@@ -82,7 +85,11 @@ const currentRouterComp = computed(() => {
     }
 
     .auth-form {
-      padding: 20px;
+      padding: 50px 20px 30px 20px;
+
+      @media screen and (max-width: 768px) {
+        padding: 20px;
+      }
     }
   }
 }

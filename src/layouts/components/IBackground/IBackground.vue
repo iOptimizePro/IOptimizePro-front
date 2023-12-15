@@ -3,15 +3,15 @@ import { onMounted } from 'vue'
 import PerlinNoise from '@/layouts/components/IBackground/PerlinNoise/PerlinNoise'
 
 const options = {
-  Background: '#0a0a0a',
-  Color1: '#ffffff',
+  Background: '#ffffff',
+  Color1: '#63ffeb',
   Color2: '#0799f2',
-  Color3: '#45217c',
+  Color3: '#57ccff',
   Length: 5,
   Nums: 400,
   Size: 2,
   noiseScale: 800,
-  ColorMode: 'Normal',
+  ColorMode: 'Linear Gradient',
 }
 onMounted(() => {
   new PerlinNoise('.i-background', options)
