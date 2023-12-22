@@ -74,14 +74,14 @@ export function getAsyncRouterMap(): IRouter[] {
       },
       children: [
         {
-          name: '创建数据仓',
-          path: '/createDataWarehouse',
+          name: '数据仓',
+          path: '/dataWarehouse',
           meta: {
             icon: 'EditOutlined',
-            title: '创建数据仓',
+            title: '数据仓',
             requireAuth: true,
           },
-          component: () => import('@/views/dashboard/index.vue'),
+          component: () => import('@/views/dataFactory/dataWarehouse/index.vue'),
         },
         {
           name: '数据接入',
