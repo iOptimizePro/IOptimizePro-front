@@ -91,7 +91,7 @@ export function getAsyncRouterMap(): IRouter[] {
             title: '数据接入',
             requireAuth: true,
           },
-          component: () => import('@/views/dashboard/index.vue'),
+          component: () => import('@/views/dataFactory/dataAccess/index.vue'),
         },
         {
           name: '数据标签库',
