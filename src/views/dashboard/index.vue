@@ -113,6 +113,15 @@ const columns = ref([
             </div>
           </div>
         </a-card>
+        <a-card class="card-item" hoverable>
+          <div class="card-item-title">数据仓数量</div>
+          <div class="card-item-content">
+            <div class="card-item-statics">$56K</div>
+            <div class="card-item-icon">
+              <Icon icon="UserOutlined" />
+            </div>
+          </div>
+        </a-card>
       </div>
       <div class="table-panel">
         <a-table :columns="columns" :data-source="dataSource" :scroll="{ x: 1200 }" class="table-container">
@@ -166,18 +175,20 @@ const columns = ref([
 
     .card-panel {
       width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
       padding: 15px;
 
+      @media screen and (max-width: 1600px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
       @media screen and (max-width: 768px) {
-        flex-direction: column;
+        grid-template-columns: 1fr;
       }
 
       .card-item {
-        min-width: 270px;
+        //min-width: 270px;
         border-radius: 20px;
         margin: 10px;
         color: #ffffff;
@@ -185,6 +196,7 @@ const columns = ref([
           1: rgb(250, 125, 121),
           2: rgb(84, 172, 208),
           3: rgb(175, 80, 208),
+          4: rgb(255, 204, 102),
         );
         @each $key, $value in $colors {
           &:nth-child(#{$key}) {

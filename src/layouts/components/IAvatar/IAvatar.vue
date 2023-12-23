@@ -77,6 +77,13 @@ function logout() {
       border-radius: 999px;
       box-shadow: 0 0 10px rgba(#1677ff, 0.4);
       color: #1677ff;
+      @media screen and (max-width: 1200px) {
+        display: none;
+      }
+
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
 
       .avatar-title-username {
         font-weight: 600;
