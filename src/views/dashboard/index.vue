@@ -84,7 +84,7 @@ const columns = ref([
 <template>
   <div class="dashboard">
     <div class="content">
-      <div class="title">Welcome to iOptimizePro</div>
+      <div class="title">Welcome to iOptimizePro!</div>
       <div class="card-panel">
         <a-card class="card-item" hoverable>
           <div class="card-item-title">本月新增任务</div>

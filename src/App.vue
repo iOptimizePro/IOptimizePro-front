@@ -1,12 +1,19 @@
 <script lang="ts" setup>
+import { computed, nextTick } from 'vue'
+import { useAppStore } from '@/stores'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
-import { theme } from 'ant-design-vue'
-import { nextTick } from 'vue'
+import enUS from 'ant-design-vue/es/locale/en_US'
+import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
 
-const themeConfig = {
-  algorithm: theme.defaultAlgorithm,
+const lang = {
+  zhCN: zhCN,
+  enUS: enUS,
 }
-
+const app = useAppStore()
+document.documentElement.setAttribute('data-dark', app.darkMode)
+const aLocale = computed(() => lang[app.localeComp])
+dayjs.locale(app.locale)
 // 加载完成
 nextTick(() => {
   setTimeout(() => document.dispatchEvent(new CustomEvent('loaded')), 2000)
@@ -14,7 +21,7 @@ nextTick(() => {
 </script>
 
 <template>
-  <a-config-provider :locale="zhCN" :theme="themeConfig">
+  <a-config-provider :locale="aLocale" :theme="app.themeConfig">
     <router-view v-slot="{ Component }">
       <transition-fade mode="out-in">
         <component :is="Component" />

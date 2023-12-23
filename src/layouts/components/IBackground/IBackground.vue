@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import PerlinNoise from '@/layouts/components/IBackground/PerlinNoise/PerlinNoise'
+import { useAppStore } from '@/stores'
 
+const appStore = useAppStore()
 const options = {
-  Background: '#ffffff',
+  Background: appStore.darkMode === 'dark' ? '#000000' : '#ffffff',
   Color1: '#63ffeb',
   Color2: '#0799f2',
   Color3: '#57ccff',

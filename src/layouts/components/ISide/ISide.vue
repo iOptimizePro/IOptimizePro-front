@@ -2,7 +2,9 @@
 import { computed } from 'vue'
 import IMenu from '@/layouts/components/IMenu/IMenu.vue'
 import { getAssetsFile } from '@/utils/utils'
+import { useAppStore } from '@/stores'
 
+const appStore = useAppStore()
 const emit = defineEmits(['update:selectedKeys', 'update:collapsed'])
 const props = defineProps<{
   selectedKeys: string[]
@@ -25,14 +27,20 @@ const propsCollapsed = computed({
   <a-layout-sider
     v-model:collapsed="propsCollapsed"
     :collapsible="collapsible"
+    :theme="appStore.darkMode || 'light'"
     :width="sideWidth"
     class="i-side"
-    theme="light"
   >
     <div class="logo">
       <a href="/">
         <img
-          :src="collapsed ? getAssetsFile('images/logo.png') : getAssetsFile('images/logo1.png')"
+          :src="
+            collapsed
+              ? getAssetsFile('images/logo.png')
+              : appStore.darkMode == 'light'
+              ? getAssetsFile('images/logo1.png')
+              : getAssetsFile('images/logo2.png')
+          "
           :style="{ height: collapsed ? '40px' : '64px' }"
           alt=""
         />

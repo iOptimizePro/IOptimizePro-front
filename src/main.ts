@@ -1,5 +1,6 @@
 // @ts-nocheck
 import '@/styles/style.scss'
+import '@/styles/common.scss'
 import { createApp } from 'vue'
 import App from '@/App.vue'
 // 引入andv icon
@@ -7,7 +8,8 @@ import * as Icons from '@ant-design/icons-vue'
 import Icon from '@/components/Icon/Icon.vue'
 import router from '@/router'
 import '@/router/permission'
-import pinia from '@/stores/index'
+import pinia from '@/stores'
+import i18n from '@/locales'
 // 过渡动画
 import VueTransitions from '@morev/vue-transitions'
 import '@morev/vue-transitions/styles'
@@ -15,6 +17,7 @@ import '@morev/vue-transitions/styles'
 const app = createApp(App)
 app.use(router)
 app.use(pinia)
+app.use(i18n)
 app.use(VueTransitions, {
   // Plugin options (optional, described below)
 })

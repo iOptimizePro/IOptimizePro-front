@@ -1,0 +1,57 @@
+{
+  "app": {
+    "title": "Data analytics and optimization platform"
+  },
+  "exception": {
+    "404": {
+      "title": "404",
+      "description": "Sorry, the page you visited does not exist",
+      "back-home": "Back Home"
+    }
+  },
+  "system": {
+    "notify": "System prompt"
+  },
+  "network": {
+    "code": {
+      "401": "Login has expired, please log in again"
+    }
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "dataFactory": "Data Factory",
+    "sceneList": "Scene List",
+    "dataProcess": "Data Process",
+    "dataAnalysis": "Data Analysis",
+    "modelDeploy": "Model Deploy",
+    "userCenter": "User Center"
+  },
+  "setting": {
+    "language": {
+      "title": "Language",
+      "zhCN": "简体中文",
+      "enUS": "English"
+    },
+    "theme": {
+      "title": "Skin",
+      "dark": "Dark",
+      "light": "Light",
+      "origin": "Default",
+      "blue": "Blue",
+      "green": "Green",
+      "red": "Red",
+      "purple": "Purple",
+      "cyan": "Cyan",
+      "orange": "Orange",
+      "yellow": "Yellow"
+    },
+    "upload": "Upload Setting"
+  },
+  "user": {
+    "login": {
+      "title": "Login",
+      "account": "Account",
+      "password": "Password"
+    }
+  }
+}
