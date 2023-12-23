@@ -33,6 +33,22 @@ const propsMenuCollapsed = computed({
         </div>
       </div>
       <div class="header-right">
+        <div class="skin">
+          <a-dropdown :trigger="['click']">
+            <a-button style="color: #000" type="link">
+              <Icon icon="SkinOutlined" />
+              皮肤
+              <Icon :size="10" icon="CaretDownOutlined" />
+            </a-button>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item key="1">暗色模式</a-menu-item>
+                <a-menu-item key="2">亮色模式</a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+        </div>
+        <div class="role">数据分析师&nbsp;&nbsp;</div>
         <a-button class="alert" type="text">
           <Icon icon="AlertOutlined" />
         </a-button>

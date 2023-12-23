@@ -21,7 +21,34 @@ const init = () => {
 }
 onMounted(() => {
   init()
+  if (window.innerWidth < 1200) {
+    menuCollapsed.value = true
+  }
 })
+
+/**
+ * 处理页面布局
+ */
+function handleWindowResize() {
+  const md = 768
+  const lg = 1200
+  const xl = 1600
+  const width = window.innerWidth
+  // 页面宽度小于768px时，打开移动端侧边栏
+  if (width < md) {
+    openDrawer.value = false
+    menuCollapsed.value = true
+    // 页面宽度小于1200px时，侧边栏收起, 移动端侧边栏关闭
+  } else if (width > md && width < lg) {
+    openDrawer.value = false
+    menuCollapsed.value = true
+    // 页面宽度大于1200px时，侧边栏展开
+  } else if (width > lg) {
+    menuCollapsed.value = false
+  }
+}
+
+window.addEventListener('resize', handleWindowResize)
 </script>
 
 <template>
