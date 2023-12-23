@@ -47,6 +47,8 @@ function logout() {
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
 .avatar {
   .avatar-wrapper {
     display: flex;
@@ -76,7 +78,15 @@ function logout() {
       font-size: 14px;
       border-radius: 999px;
       box-shadow: 0 0 10px rgba(#1677ff, 0.4);
-      color: #1677ff;
+      //color: #1677ff;
+      @include useTheme {
+        @if getMode() == 'light' {
+          color: #1677ff;
+        } @else {
+          color: #fff;
+        }
+      }
+
       @media screen and (max-width: 1200px) {
         display: none;
       }

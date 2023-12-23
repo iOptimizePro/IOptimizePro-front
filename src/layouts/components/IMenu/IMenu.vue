@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
+import { useAppStore } from '@/stores'
 
+const appStore = useAppStore()
 const emit = defineEmits(['update:selectedKeys'])
 const props = defineProps<{
   selectedKeys: string[]
@@ -13,7 +15,12 @@ const propsSelectedKeys = computed({
 </script>
 
 <template>
-  <a-menu v-model:selectedKeys="propsSelectedKeys" :inline-indent="15" mode="inline">
+  <a-menu
+    v-model:selectedKeys="propsSelectedKeys"
+    :inline-indent="15"
+    mode="inline"
+    style="background: transparent; border-inline-end: none"
+  >
     <!-- 或者使用 mode="inline" -->
     <template v-for="item in menuList" :key="item.path">
       <a-sub-menu v-if="'children' in item" :key="item.path">

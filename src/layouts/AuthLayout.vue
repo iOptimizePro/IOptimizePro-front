@@ -28,6 +28,8 @@ const currentRouterComp = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
 #auth-layout {
   display: flex;
   justify-content: center;
@@ -42,7 +44,9 @@ const currentRouterComp = computed(() => {
     width: 700px;
     margin-left: auto;
     margin-right: auto;
-    background: #ffffff;
+    @include useTheme {
+      background: getModeVar('bgColor');
+    }
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

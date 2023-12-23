@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import IAvatar from '@/layouts/components/IAvatar/IAvatar.vue'
+import { useAppStore } from '@/stores'
+import { primaryColorEnum } from '@/config/theme.config'
 
+const appStore = useAppStore()
 const emit = defineEmits(['update:openDrawer', 'update:menuCollapsed'])
 const props = defineProps<{
   openDrawer: boolean
@@ -29,26 +32,47 @@ const propsMenuCollapsed = computed({
         </a-button>
         <div class="logo">
           <!--<div class="logo-icon"></div>-->
-          <div class="title">智能工业数据分析与优化平台</div>
+          <div class="title">{{ $t('app.title') }}</div>
         </div>
       </div>
       <div class="header-right">
+        <div class="lang">
+          <a-dropdown :trigger="['click']">
+            <a-button type="link">
+              <Icon icon="GlobalOutlined" />
+              语言
+              <Icon :size="10" icon="CaretDownOutlined" />
+            </a-button>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item key="1" @click="appStore.locale = 'zhCN'">中文</a-menu-item>
+                <a-menu-item key="2" @click="appStore.locale = 'enUS'">English</a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+        </div>
         <div class="skin">
           <a-dropdown :trigger="['click']">
-            <a-button style="color: #000" type="link">
+            <a-button type="link">
               <Icon icon="SkinOutlined" />
               皮肤
               <Icon :size="10" icon="CaretDownOutlined" />
             </a-button>
             <template #overlay>
               <a-menu>
-                <a-menu-item key="1">暗色模式</a-menu-item>
-                <a-menu-item key="2">亮色模式</a-menu-item>
+                <a-menu-item key="1" @click="appStore.darkMode = 'dark'">{{ $t(`setting.theme.dark`) }}</a-menu-item>
+                <a-menu-item key="2" @click="appStore.darkMode = 'light'">{{ $t(`setting.theme.light`) }}</a-menu-item>
+                <a-menu-item v-for="(color, name) in primaryColorEnum" :key="name" @click="appStore.themeName = name">
+                  {{ $t(`setting.theme.${name}`) }}
+                </a-menu-item>
               </a-menu>
             </template>
           </a-dropdown>
         </div>
-        <div class="role">数据分析师&nbsp;&nbsp;</div>
+        <div class="role">
+          <Icon icon="LockOutlined" />
+          数据分析师&nbsp;&nbsp;
+        </div>
         <a-button class="alert" type="text">
           <Icon icon="AlertOutlined" />
         </a-button>
@@ -59,6 +83,8 @@ const propsMenuCollapsed = computed({
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
 .inner-layout-header {
   position: relative;
   padding: 0 10px;
@@ -116,7 +142,9 @@ const propsMenuCollapsed = computed({
         .title {
           font-size: 20px;
           font-weight: 500;
-          color: #000;
+          @include useTheme {
+            color: getModeVar('textColor');
+          }
         }
       }
     }
@@ -124,6 +152,30 @@ const propsMenuCollapsed = computed({
     .header-right {
       display: flex;
       align-items: center;
+
+      .lang,
+      .skin {
+        button {
+          @include useTheme {
+            color: getModeVar('textColor');
+          }
+        }
+      }
+
+      .role {
+        // 单行文本溢出显示省略号
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100px;
+
+        @media screen and (max-width: 1200px) {
+          display: none;
+        }
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
+      }
 
       .alert {
         width: 35px;
@@ -133,7 +185,9 @@ const propsMenuCollapsed = computed({
         padding: 2px;
         border: 1px #eee solid;
         border-radius: 999px;
-        color: #000;
+        @include useTheme {
+          color: getModeVar('textColor');
+        }
       }
     }
   }

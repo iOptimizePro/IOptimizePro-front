@@ -19,10 +19,12 @@
     "@morev/vue-transitions": "^2.3.6",
     "alova": "^2.16.0",
     "ant-design-vue": "4.x",
+    "dayjs": "^1.11.10",
     "p5": "^1.9.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
     "vue": "^3.3.4",
+    "vue-i18n": "9.3.0-beta.26",
     "vue-request": "^2.0.4",
     "vue-router": "^4.2.5"
   },

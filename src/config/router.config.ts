@@ -1,5 +1,6 @@
 import BasicLayout from '@/layouts/BasicLayout.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
+import i18n from '@/locales'
 
 export const constantRouterMap = [
   {
@@ -55,7 +56,7 @@ export interface IRouter {
 export function getAsyncRouterMap(): IRouter[] {
   return [
     {
-      name: '首页',
+      name: i18n.global?.t('menu.dashboard'),
       path: '/dashboard',
       meta: {
         icon: 'EditOutlined',
@@ -65,7 +66,7 @@ export function getAsyncRouterMap(): IRouter[] {
       component: () => import('@/views/dashboard/index.vue'),
     },
     {
-      name: '数据工厂',
+      name: i18n.global?.t('menu.dataFactory'),
       path: '/dataFactory',
       meta: {
         icon: 'EditOutlined',
@@ -106,7 +107,7 @@ export function getAsyncRouterMap(): IRouter[] {
       ],
     },
     {
-      name: '场景列表',
+      name: i18n.global?.t('menu.sceneList'),
       path: '/sceneList',
       meta: {
         icon: 'EditOutlined',
@@ -401,7 +402,7 @@ export function getAsyncRouterMap(): IRouter[] {
       ],
     },
     {
-      name: '数据处理',
+      name: i18n.global?.t('menu.dataProcess'),
       path: '/dataProcess',
       meta: {
         icon: 'EditOutlined',
@@ -472,7 +473,7 @@ export function getAsyncRouterMap(): IRouter[] {
       ],
     },
     {
-      name: '数据分析',
+      name: i18n.global?.t('menu.dataAnalysis'),
       path: '/dataAnalysis',
       meta: {
         icon: 'EditOutlined',
@@ -543,7 +544,7 @@ export function getAsyncRouterMap(): IRouter[] {
       ],
     },
     {
-      name: '模型部署',
+      name: i18n.global?.t('menu.modelDeploy'),
       path: '/modelDeploy',
       meta: {
         icon: 'EditOutlined',
@@ -594,7 +595,7 @@ export function getAsyncRouterMap(): IRouter[] {
       ],
     },
     {
-      name: '个人中心',
+      name: i18n.global?.t('menu.userCenter'),
       path: '/userCenter',
       meta: {
         icon: 'EditOutlined',
