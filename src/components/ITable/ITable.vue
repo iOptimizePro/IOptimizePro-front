@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-const props = defineProps({
-  columns,
-  dataSource,
-})
+const props = defineProps<{
+  columns: any[]
+  dataSource: any[]
+}>()
 </script>
 
 <template>
