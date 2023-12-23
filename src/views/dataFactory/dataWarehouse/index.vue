@@ -118,6 +118,8 @@ const columns = ref([
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
 .data-warehouse {
   .table-panel {
     width: calc(100% - 50px);
@@ -126,17 +128,18 @@ const columns = ref([
     .table-container {
       width: 100%;
 
-      ::v-deep .ant-table-title {
-        // ::v-deep deprecated 不建议使用
+      :deep(.ant-table-title) {
         padding: 10px 0 0 0;
       }
 
-      ::v-deep .ant-table-cell {
-        background: #ffffff;
+      :deep(.ant-table-cell) {
+        @include useTheme {
+          background: getModeVar('cardBgColor');
+        }
         //color: #1677ff;
       }
 
-      ::v-deep th.ant-table-cell {
+      :deep(th.ant-table-cell) {
         color: #1677ff;
         font-size: 18px;
       }
