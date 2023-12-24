@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { nextTick, reactive, ref } from 'vue'
-import { useRequest } from 'alova'
-import { getCodeImgApi, loginApi } from '@/apis/auth'
-import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores'
+import {nextTick, reactive, ref} from 'vue'
+import {useRequest} from 'alova'
+import {getCodeImgApi, loginApi} from '@/apis/auth'
+import {useRouter} from 'vue-router'
+import {useUserStore} from '@/stores'
+import i18n from '@/locales'
 
 declare type FormState = {
   username: string
@@ -17,6 +18,7 @@ const captchaEnabled = ref(true)
 const codeUrl = ref('')
 
 const formState = reactive<FormState>({
+  tenant: '智造前沿',
   username: 'admin',
   password: 'admin',
   remember: true,
@@ -25,15 +27,16 @@ const formState = reactive<FormState>({
 })
 
 const rules = reactive({
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-  code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+  tenant: [{required: true, message: '请输入租户', trigger: 'blur'}],
+  username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+  password: [{required: true, message: '请输入密码', trigger: 'blur'}],
+  code: [{required: true, message: '请输入验证码', trigger: 'blur'}],
 })
 
 const router = useRouter()
 const userStore = useUserStore()
 
-const { loading, send, onSuccess, onError } = useRequest(loginApi(formState), {
+const {loading, send, onSuccess, onError} = useRequest(loginApi(formState), {
   // 默认不发出
   immediate: false,
 })
@@ -45,7 +48,7 @@ onSuccess((event) => {
     userStore.token = data.token
     userStore.userInfo = data.userVO
     // 获取当前路由的参数, 跳转到指定页面
-    const { redirect } = router.currentRoute.value.query
+    const {redirect} = router.currentRoute.value.query
     router.push((redirect as string) || '/')
   }
 })
@@ -79,62 +82,66 @@ nextTick(() => {
 <template>
   <div>
     <a-form
-      ref="formRef"
-      :label-col="{ span: 5 }"
-      :model="formState"
-      :rules="rules"
-      class="login-form"
-      label-align="left"
+        ref="formRef"
+        :label-col="{ span: 5 }"
+        :model="formState"
+        :rules="rules"
+        class="login-form"
+        label-align="left"
     >
-      <a-form-item label="用户名" name="username">
-        <a-input v-model:value="formState.username" placeholder="请输入用户名">
+      <a-form-item :label="$t('user.login.tenant')" name="tenant">
+        <a-input v-model:value="formState.tenant" :placeholder="$t('user.login.placeholder.tenant')"/>
+      </a-form-item>
+
+      <a-form-item :label="$t('user.login.username')" name="username">
+        <a-input v-model:value="formState.username" :placeholder="$t('user.login.placeholder.username')">
           <template #prefix>
-            <Icon icon="UserOutlined" />
+            <Icon icon="UserOutlined"/>
           </template>
         </a-input>
       </a-form-item>
 
-      <a-form-item label="密码" name="password">
-        <a-input-password v-model:value="formState.password" placeholder="请输入密码">
+      <a-form-item :label="$t('user.login.password')" name="password">
+        <a-input-password v-model:value="formState.password" :placeholder="$t('user.login.placeholder.password')">
           <template #prefix>
-            <Icon icon="LockOutlined" />
+            <Icon icon="LockOutlined"/>
           </template>
         </a-input-password>
       </a-form-item>
 
-      <a-form-item v-if="captchaEnabled" label="验证码" name="code">
+      <a-form-item v-if="captchaEnabled" :label="$t('user.login.captcha')" name="code">
         <a-row :gutter="16">
           <a-col :span="16" class="gutter-row">
-            <a-input v-model:value="formState.code" placeholder="请输入验证码">
+            <a-input v-model:value="formState.code" :placeholder="$t('user.login.placeholder.captcha')">
               <template #prefix>
-                <Icon icon="SecurityScanOutlined" />
+                <Icon icon="SecurityScanOutlined"/>
               </template>
             </a-input>
           </a-col>
           <a-col :span="8" class="gutter-row">
-            <img :src="codeUrl" class="getCaptcha" style="cursor: pointer" @click="getCode" />
+            <img :src="codeUrl" class="getCaptcha" style="cursor: pointer" @click="getCode"/>
           </a-col>
         </a-row>
       </a-form-item>
 
       <div style="display: flex; justify-content: space-between; margin: 20px 0">
         <a-form-item name="remember" no-style>
-          <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
+          <a-checkbox v-model:checked="formState.remember">{{ $t('user.login.remember') }}</a-checkbox>
         </a-form-item>
-        <router-link to="/auth/register">忘记密码？</router-link>
+        <router-link to="/auth/register">{{ $t('user.login.forget') }}</router-link>
       </div>
 
       <a-form-item>
         <a-button
-          :loading="loading"
-          html-type="submit"
-          style="width: 100%; margin-bottom: 20px"
-          type="primary"
-          @click="login"
-          >登录
+            :loading="loading"
+            html-type="submit"
+            style="width: 100%; margin-bottom: 20px"
+            type="primary"
+            @click="login"
+        >{{ $t('user.login.submit') }}
         </a-button>
         Or
-        <router-link to="/auth/register">现在注册</router-link>
+        <router-link to="/auth/register">{{ $t('user.login.nowRegister') }}</router-link>
       </a-form-item>
     </a-form>
   </div>
