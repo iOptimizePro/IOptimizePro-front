@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {onMounted, reactive, ref, watch} from 'vue'
-import {useRoute, useRouter} from 'vue-router'
-import {asyncRouterMap} from '@/router'
+import { onMounted, reactive, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { asyncRouterMap } from '@/router'
 import ISide from '@/layouts/components/ISide/ISide.vue'
 import IHeader from '@/layouts/components/IHeader/IHeader.vue'
-import type {IRouter} from '@/config/router.config'
+import type { IRouter } from '@/config/router.config'
 
 const route = useRoute() // 路由实例
 const router = useRouter() // 路由实例
@@ -96,19 +96,19 @@ function handleTabEdit(activeKey: string, action: 'add' | 'remove') {
  * 处理路由变化 向tabList中添加tab
  */
 watch(
-    () => route.path,
-    (path) => {
-      const item = menuConfig.menuListArr.find((item) => item.path === path) as IRouter
-      if (item) {
-        menuConfig.selectedKeys = [item.path]
-      }
-      const curTab = tabList.value.find((item) => item.path === path)
-      if (curTab || path === undefined) {
-        return
-      }
-      tabList.value.push(item)
-    },
-    {immediate: true, deep: true}
+  () => route.path,
+  (path) => {
+    const item = menuConfig.menuListArr.find((item) => item.path === path) as IRouter
+    if (item) {
+      menuConfig.selectedKeys = [item.path]
+    }
+    const curTab = tabList.value.find((item) => item.path === path)
+    if (curTab || path === undefined) {
+      return
+    }
+    tabList.value.push(item)
+  },
+  { immediate: true, deep: true },
 )
 
 /**
@@ -140,56 +140,67 @@ window.addEventListener('resize', handleWindowResize)
   <div class="basic-layout">
     <a-layout class="layout">
       <i-side
-          v-model:collapsed="menuConfig.collapsed"
-          v-model:selected-keys="menuConfig.selectedKeys"
-          :collapsible="true"
-          :menu-list="menuConfig.menuList"
-          :side-width="menuConfig.sideWidth"
-          class="inner-side"
+        v-model:collapsed="menuConfig.collapsed"
+        v-model:selected-keys="menuConfig.selectedKeys"
+        :collapsible="true"
+        :menu-list="menuConfig.menuList"
+        :side-width="menuConfig.sideWidth"
+        class="inner-side"
       />
       <a-layout class="inner-layout">
-        <i-header v-model:menu-collapsed="menuConfig.collapsed" v-model:open-drawer="menuConfig.openDrawer"/>
+        <i-header v-model:menu-collapsed="menuConfig.collapsed" v-model:open-drawer="menuConfig.openDrawer" />
         <!--使用a-config-provider修改单个组件的样式 TODO-->
-        <a-config-provider :theme='{"components": {
-          "Tabs": {
-            "borderRadius": 10,
-            "colorBgContainer": "#1677ff",
-            "colorText": "#4096ff",
-            "colorPrimary": "#fff",
-            "fontSize": 12,
-            "padding": 6,
-            "margin": 0,
-            "controlHeight": 25,
-            "controlHeightLG": 25
-          }
-        }}'>
+        <a-config-provider
+          :theme="{
+            components: {
+              Tabs: {
+                borderRadius: 10,
+                colorBgContainer: '#1677ff',
+                colorText: '#4096ff',
+                colorPrimary: '#fff',
+                fontSize: 12,
+                padding: 6,
+                margin: 0,
+                controlHeight: 25,
+                controlHeightLG: 25,
+              },
+            },
+          }"
+        >
           <!--页面切换的Tab栏-->
-          <a-tabs v-model:active-key="menuConfig.selectedKeys[0]" hideAdd type="editable-card"
-                  @change="handleTabChange" @edit="handleTabEdit">
+          <a-tabs
+            v-model:active-key="menuConfig.selectedKeys[0]"
+            hideAdd
+            type="editable-card"
+            @change="handleTabChange"
+            @edit="handleTabEdit"
+          >
             <template v-for="item in tabList" :key="item">
-              <a-tab-pane v-if="item" :key="item.path" :closable="tabList.length > 1" :tab="item.name"/>
+              <a-tab-pane v-if="item" :key="item.path" :closable="tabList.length > 1" :tab="item.name" />
             </template>
           </a-tabs>
         </a-config-provider>
-        <a-layout-content style="margin: 0 10px 10px 10px;">
+        <a-layout-content style="margin: 0 10px 10px 10px">
           <slot></slot>
         </a-layout-content>
-        <a-layout-footer style="">
-          iOptimize 2023 Created by 智造前沿
-        </a-layout-footer>
+        <a-layout-footer style=""> iOptimize 2023 Created by 智造前沿 </a-layout-footer>
       </a-layout>
     </a-layout>
 
     <!--移动端侧边栏 a-drawer-->
     <a-drawer
-        v-model:open="menuConfig.openDrawer"
-        :body-style="{ padding: 0 }"
-        :closable="false"
-        :width="menuConfig.sideWidth"
-        placement="left"
+      v-model:open="menuConfig.openDrawer"
+      :body-style="{ padding: 0 }"
+      :closable="false"
+      :width="menuConfig.sideWidth"
+      placement="left"
     >
-      <i-side v-model:selected-keys="menuConfig.selectedKeys" :collapsible="false" :menu-list="menuConfig.menuList"
-              :side-width="menuConfig.sideWidth"/>
+      <i-side
+        v-model:selected-keys="menuConfig.selectedKeys"
+        :collapsible="false"
+        :menu-list="menuConfig.menuList"
+        :side-width="menuConfig.sideWidth"
+      />
     </a-drawer>
   </div>
 </template>

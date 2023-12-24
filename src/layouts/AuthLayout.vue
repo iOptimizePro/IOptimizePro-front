@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import IBackground from '@/layouts/components/IBackground/IBackground.vue'
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 import router from '@/router'
-import {useAppStore} from '@/stores'
+import { useAppStore } from '@/stores'
 
 const appStore = useAppStore()
 const iBackgroundRef = ref<any>(null)
@@ -24,9 +24,9 @@ function toggleDarkMode(dark: 'dark' | 'light') {
         <div class="lang">
           <a-dropdown :trigger="['click']">
             <a-button type="link">
-              <Icon icon="GlobalOutlined"/>
+              <Icon icon="GlobalOutlined" />
               {{ $t('setting.language.title') }}
-              <Icon :size="10" icon="CaretDownOutlined"/>
+              <Icon :size="10" icon="CaretDownOutlined" />
             </a-button>
             <template #overlay>
               <a-menu>
@@ -39,9 +39,9 @@ function toggleDarkMode(dark: 'dark' | 'light') {
         <div class="skin">
           <a-dropdown :trigger="['click']">
             <a-button type="link">
-              <Icon icon="SkinOutlined"/>
+              <Icon icon="SkinOutlined" />
               {{ $t('setting.theme.title') }}
-              <Icon :size="10" icon="CaretDownOutlined"/>
+              <Icon :size="10" icon="CaretDownOutlined" />
             </a-button>
             <template #overlay>
               <a-menu>
@@ -57,7 +57,7 @@ function toggleDarkMode(dark: 'dark' | 'light') {
         </div>
       </div>
     </div>
-    <i-background ref="iBackgroundRef"/>
+    <i-background ref="iBackgroundRef" />
     <div class="container">
       <div class="auth-side">
         <div class="wrapper">
@@ -66,7 +66,7 @@ function toggleDarkMode(dark: 'dark' | 'light') {
       </div>
       <router-view v-slot="{ Component }" class="auth-form">
         <transition-slide :offset="[-16, 0]" mode="out-in">
-          <component :is="Component"/>
+          <component :is="Component" />
         </transition-slide>
       </router-view>
     </div>
@@ -156,8 +156,9 @@ function toggleDarkMode(dark: 'dark' | 'light') {
         align-items: center;
 
         .title {
-          font: 500 45px 'Microsoft YaHei',
-          sans-serif;
+          font:
+            500 45px 'Microsoft YaHei',
+            sans-serif;
           color: #fff;
 
           @media screen and (max-width: 768px) {

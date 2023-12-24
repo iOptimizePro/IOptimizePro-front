@@ -147,6 +147,7 @@ const columns = ref([
 
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
+
 .table-panel {
   width: calc(100% - 50px);
   margin-top: 20px;

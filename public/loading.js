@@ -1,5 +1,5 @@
 // 设置禁止元素选中
-document.onselectstart = function() {
+document.onselectstart = function () {
   return false
 }
 
@@ -10,11 +10,11 @@ const startEvent = new CustomEvent('loading')
 const loadEvent = new CustomEvent('loaded')
 
 // 开始加载
-document.addEventListener('loading', function() {
+document.addEventListener('loading', function () {
   let loadingDom = document.querySelector('#loading')
   loadingDom.style.opacity = 1
   loadingDom.style.display = 'flex'
-  loadingDom.addEventListener('transitionend', function() {
+  loadingDom.addEventListener('transitionend', function () {
     if (loadingDom.style.opacity === '1') {
       loadingDom.style.display = 'flex'
     }
@@ -22,10 +22,10 @@ document.addEventListener('loading', function() {
 })
 
 // 加载完成
-document.addEventListener('loaded', function() {
+document.addEventListener('loaded', function () {
   let loadingDom = document.querySelector('#loading')
   loadingDom.style.opacity = 0
-  loadingDom.addEventListener('transitionend', function() {
+  loadingDom.addEventListener('transitionend', function () {
     if (loadingDom.style.opacity === '0') {
       loadingDom.style.display = 'none'
     }
