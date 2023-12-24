@@ -58,11 +58,12 @@ export default class PerlinNoise {
   private options: any
   private dom: HTMLElement | null = document.querySelector('.perlinNoise')
   private timer: any
+  private p5: any
 
   constructor(dom: string, options: any) {
     this.dom = document.querySelector(dom)
     this.options = options
-    new p5(this.sketch)
+    this.p5 = new p5(this.sketch)
   }
 
   private sketch = (p: p5) => {

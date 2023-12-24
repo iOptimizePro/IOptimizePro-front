@@ -42,7 +42,7 @@ export const useAppStore = defineStore(
           colorError: '#cf4444',
           colorInfo: variables[themeName.value] || '#27ba9b',
           wireframe: true,
-          // borderRadius: 0, // 直角风格
+          borderRadius: 0, // 直角风格
         },
         algorithm: darkMode.value === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm,
       }

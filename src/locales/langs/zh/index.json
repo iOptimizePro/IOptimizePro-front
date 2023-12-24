@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "智能工业数据分析与优化平台"
+    "title": "智能工业数据分析与优化平台",
+    "welcome": "欢迎使用iOptimizePro!"
   },
   "exception": {
     "404": {
@@ -52,6 +53,17 @@
       "title": "登录",
       "account": "账号",
       "password": "密码"
-    }
+    },
+    "center": {
+      "title": "用户中心"
+    },
+    "setting": {
+      "title": "个人设置"
+    },
+    "logout": "退出登录"
+  },
+  "role": {
+    "admin": "系统管理员",
+    "analyst": "数据分析师"
   }
 }

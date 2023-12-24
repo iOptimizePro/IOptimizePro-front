@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Data analytics and optimization platform"
+    "title": "Data analytics and optimization platform",
+    "welcome": "Welcome to iOptimizePro!"
   },
   "exception": {
     "404": {
@@ -52,6 +53,17 @@
       "title": "Login",
       "account": "Account",
       "password": "Password"
-    }
+    },
+    "center": {
+      "title": "User Center"
+    },
+    "setting": {
+      "title": "Setting"
+    },
+    "logout": "Logout"
+  },
+  "role": {
+    "admin": "System Admin",
+    "analyst": "Data analyst"
   }
 }

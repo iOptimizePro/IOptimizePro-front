@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import IAvatar from '@/layouts/components/IAvatar/IAvatar.vue'
 import { useAppStore } from '@/stores'
-import { primaryColorEnum } from '@/config/theme.config'
 
 const appStore = useAppStore()
 const emit = defineEmits(['update:openDrawer', 'update:menuCollapsed'])
@@ -40,7 +39,7 @@ const propsMenuCollapsed = computed({
           <a-dropdown :trigger="['click']">
             <a-button type="link">
               <Icon icon="GlobalOutlined" />
-              语言
+              {{ $t('setting.language.title') }}
               <Icon :size="10" icon="CaretDownOutlined" />
             </a-button>
             <template #overlay>
@@ -55,23 +54,24 @@ const propsMenuCollapsed = computed({
           <a-dropdown :trigger="['click']">
             <a-button type="link">
               <Icon icon="SkinOutlined" />
-              皮肤
+              {{ $t('setting.theme.title') }}
               <Icon :size="10" icon="CaretDownOutlined" />
             </a-button>
             <template #overlay>
               <a-menu>
                 <a-menu-item key="1" @click="appStore.darkMode = 'dark'">{{ $t(`setting.theme.dark`) }}</a-menu-item>
                 <a-menu-item key="2" @click="appStore.darkMode = 'light'">{{ $t(`setting.theme.light`) }}</a-menu-item>
-                <a-menu-item v-for="(color, name) in primaryColorEnum" :key="name" @click="appStore.themeName = name">
-                  {{ $t(`setting.theme.${name}`) }}
-                </a-menu-item>
+                <!--更多颜色 TODO 废弃-->
+                <!--<a-menu-item v-for="(color, name) in primaryColorEnum" :key="name" @click="appStore.themeName = name">-->
+                <!--  {{ $t(`setting.theme.${name}`) }}-->
+                <!--</a-menu-item>-->
               </a-menu>
             </template>
           </a-dropdown>
         </div>
         <div class="role">
           <Icon icon="LockOutlined" />
-          数据分析师&nbsp;&nbsp;
+          {{ $t('role.analyst') }}&nbsp;&nbsp;
         </div>
         <a-button class="alert" type="text">
           <Icon icon="AlertOutlined" />
@@ -135,7 +135,7 @@ const propsMenuCollapsed = computed({
           width: 40px;
           height: 40px;
           margin-right: 10px;
-          background: url('@/assets/images/logo.png') no-repeat left center;
+          background: url('@/assets/images/logo-blue.png') no-repeat left center;
           background-size: cover;
         }
 
@@ -167,7 +167,7 @@ const propsMenuCollapsed = computed({
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        max-width: 100px;
+        max-width: 110px;
 
         @media screen and (max-width: 1200px) {
           display: none;
