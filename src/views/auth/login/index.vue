@@ -4,9 +4,9 @@ import {useRequest} from 'alova'
 import {getCodeImgApi, loginApi} from '@/apis/auth'
 import {useRouter} from 'vue-router'
 import {useUserStore} from '@/stores'
-import i18n from '@/locales'
 
 declare type FormState = {
+  tenant: string
   username: string
   password: string
   remember?: boolean

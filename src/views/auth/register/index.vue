@@ -6,6 +6,7 @@ import {useRouter} from 'vue-router'
 import {useUserStore} from '@/stores'
 
 declare type FormState = {
+  tenant: string
   username: string
   email: string
   password: string
