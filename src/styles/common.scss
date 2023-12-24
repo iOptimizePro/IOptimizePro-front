@@ -38,3 +38,20 @@
   transition: all 0.2s, background-color 0s !important;
   background: if(getMode() == 'dark', #141414, #ffffff);
 }
+
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(#bababa, 0.5);
+  border-radius: 32px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(#ffffff, 0.1);
+  border-radius: 32px;
+}

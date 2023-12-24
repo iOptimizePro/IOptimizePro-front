@@ -60,7 +60,7 @@ export function getAsyncRouterMap(): IRouter[] {
       path: '/dashboard',
       meta: {
         icon: 'EditOutlined',
-        title: '产品列表',
+        title: '首页',
         requireAuth: true,
       },
       component: () => import('@/views/dashboard/index.vue'),

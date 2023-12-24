@@ -31,6 +31,8 @@ declare module 'vue' {
     ASpace: typeof import('ant-design-vue/es')['Space']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
     ATable: typeof import('ant-design-vue/es')['Table']
+    ATabPane: typeof import('ant-design-vue/es')['TabPane']
+    ATabs: typeof import('ant-design-vue/es')['Tabs']
     AUploadDragger: typeof import('ant-design-vue/es')['UploadDragger']
     Icon: typeof import('./src/components/Icon/Icon.vue')['default']
     ITable: typeof import('./src/components/ITable/ITable.vue')['default']
