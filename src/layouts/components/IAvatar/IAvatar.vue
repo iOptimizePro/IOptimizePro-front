@@ -28,17 +28,17 @@ function logout() {
         <a-menu>
           <a-menu-item key="1">
             <Icon icon="UserOutlined" />
-            <router-link to="/">&nbsp;个人中心</router-link>
+            <router-link to="/">&nbsp;{{ $t('user.center.title') }}</router-link>
           </a-menu-item>
           <a-menu-item key="2">
             <Icon icon="SettingOutlined" />
-            <router-link to="/">&nbsp;个人设置</router-link>
+            <router-link to="/">&nbsp;{{ $t('user.setting.title') }}</router-link>
           </a-menu-item>
           <a-menu-divider />
           <a-menu-item key="3">
             <Icon icon="LogoutOutlined" />
             <!--技巧使用 a标签而不是router-link可以刷新页面，如果你需要的话-->
-            <a href="/auth/login" @click="logout">&nbsp;退出登录</a>
+            <a href="/auth/login" @click="logout">&nbsp;{{ $t('user.logout') }}</a>
           </a-menu-item>
         </a-menu>
       </template>

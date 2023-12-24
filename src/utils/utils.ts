@@ -4,6 +4,6 @@
  * @returns {string}
  */
 export function getAssetsFile(url: string) {
-  // @ts-ignore
-  return new URL(`../assets/${url}`, import.meta.url).href
+    // @ts-ignore
+    return new URL(`../assets/${url}`, import.meta.url).href
 }

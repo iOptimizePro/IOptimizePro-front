@@ -36,10 +36,12 @@ const propsCollapsed = computed({
         <img
           :src="
             collapsed
-              ? getAssetsFile('images/logo.png')
+              ? appStore.darkMode == 'light'
+                ? getAssetsFile('images/logo-blue.png')
+                : getAssetsFile('images/logo-white.png')
               : appStore.darkMode == 'light'
-              ? getAssetsFile('images/logo1.png')
-              : getAssetsFile('images/logo2.png')
+              ? getAssetsFile('images/logo1-blue.png')
+              : getAssetsFile('images/logo1-white.png')
           "
           :style="{ height: collapsed ? '40px' : '64px' }"
           alt=""

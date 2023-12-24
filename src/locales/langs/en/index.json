@@ -1,6 +1,7 @@
 {
   "app": {
-    "title": "Data analytics and optimization platform"
+    "title": "Data analytics and optimization platform",
+    "welcome": "Welcome to iOptimizePro!"
   },
   "exception": {
     "404": {
@@ -50,8 +51,50 @@
   "user": {
     "login": {
       "title": "Login",
-      "account": "Account",
-      "password": "Password"
-    }
+      "tenant": "Tenant",
+      "username": "Username",
+      "password": "Password",
+      "captcha": "Captcha",
+      "remember": "Remember me",
+      "submit": "Login",
+      "forget": "Forget password",
+      "nowRegister": "Now register",
+      "placeholder": {
+        "tenant": "Please select tenant",
+        "username": "Please enter username",
+        "password": "Please enter password",
+        "captcha": "Please enter captcha"
+      }
+    },
+    "register": {
+      "title": "Register",
+      "tenant": "Tenant",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirm": "Confirm",
+      "captcha": "Captcha",
+      "submit": "Register",
+      "haveAccount": "Have account? Login now",
+      "placeholder": {
+        "tenant": "Please select tenant",
+        "username": "Please enter username",
+        "email": "Please enter email",
+        "password": "Please enter password",
+        "confirm": "Please enter confirm password",
+        "captcha": "Please enter captcha"
+      }
+    },
+    "center": {
+      "title": "User Center"
+    },
+    "setting": {
+      "title": "Setting"
+    },
+    "logout": "Logout"
+  },
+  "role": {
+    "admin": "System Admin",
+    "analyst": "Data analyst"
   }
 }

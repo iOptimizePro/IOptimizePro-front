@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores'
 
 declare type FormState = {
+  tenant: string
   username: string
   password: string
   remember?: boolean
@@ -17,6 +18,7 @@ const captchaEnabled = ref(true)
 const codeUrl = ref('')
 
 const formState = reactive<FormState>({
+  tenant: '智造前沿',
   username: 'admin',
   password: 'admin',
   remember: true,
@@ -25,6 +27,7 @@ const formState = reactive<FormState>({
 })
 
 const rules = reactive({
+  tenant: [{ required: true, message: '请输入租户', trigger: 'blur' }],
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
   code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
@@ -86,26 +89,30 @@ nextTick(() => {
       class="login-form"
       label-align="left"
     >
-      <a-form-item label="用户名" name="username">
-        <a-input v-model:value="formState.username" placeholder="请输入用户名">
+      <a-form-item :label="$t('user.login.tenant')" name="tenant">
+        <a-input v-model:value="formState.tenant" :placeholder="$t('user.login.placeholder.tenant')" />
+      </a-form-item>
+
+      <a-form-item :label="$t('user.login.username')" name="username">
+        <a-input v-model:value="formState.username" :placeholder="$t('user.login.placeholder.username')">
           <template #prefix>
             <Icon icon="UserOutlined" />
           </template>
         </a-input>
       </a-form-item>
 
-      <a-form-item label="密码" name="password">
-        <a-input-password v-model:value="formState.password" placeholder="请输入密码">
+      <a-form-item :label="$t('user.login.password')" name="password">
+        <a-input-password v-model:value="formState.password" :placeholder="$t('user.login.placeholder.password')">
           <template #prefix>
             <Icon icon="LockOutlined" />
           </template>
         </a-input-password>
       </a-form-item>
 
-      <a-form-item v-if="captchaEnabled" label="验证码" name="code">
+      <a-form-item v-if="captchaEnabled" :label="$t('user.login.captcha')" name="code">
         <a-row :gutter="16">
           <a-col :span="16" class="gutter-row">
-            <a-input v-model:value="formState.code" placeholder="请输入验证码">
+            <a-input v-model:value="formState.code" :placeholder="$t('user.login.placeholder.captcha')">
               <template #prefix>
                 <Icon icon="SecurityScanOutlined" />
               </template>
@@ -119,9 +126,9 @@ nextTick(() => {
 
       <div style="display: flex; justify-content: space-between; margin: 20px 0">
         <a-form-item name="remember" no-style>
-          <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
+          <a-checkbox v-model:checked="formState.remember">{{ $t('user.login.remember') }}</a-checkbox>
         </a-form-item>
-        <router-link to="/auth/register">忘记密码？</router-link>
+        <router-link to="/auth/register">{{ $t('user.login.forget') }}</router-link>
       </div>
 
       <a-form-item>
@@ -131,10 +138,10 @@ nextTick(() => {
           style="width: 100%; margin-bottom: 20px"
           type="primary"
           @click="login"
-          >登录
+          >{{ $t('user.login.submit') }}
         </a-button>
         Or
-        <router-link to="/auth/register">现在注册</router-link>
+        <router-link to="/auth/register">{{ $t('user.login.nowRegister') }}</router-link>
       </a-form-item>
     </a-form>
   </div>

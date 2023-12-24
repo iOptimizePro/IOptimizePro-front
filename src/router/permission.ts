@@ -8,20 +8,20 @@ let userStore: any = null
 nextTick(() => (userStore = useUserStore()))
 
 router.beforeEach((to: any, from: any, next: any) => {
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
-  if (to.meta.requireAuth) {
-    if (userStore.token) {
-      next()
-    } else {
-      next({
-        path: '/auth/login',
-        // 在login中使用redirect参数跳转到登录前的页面
-        query: { redirect: to.fullPath },
-      })
+    if (to.meta.title) {
+        document.title = to.meta.title
     }
-  } else {
-    next()
-  }
+    if (to.meta.requireAuth) {
+        if (userStore.token) {
+            next()
+        } else {
+            next({
+                path: '/auth/login',
+                // 在login中使用redirect参数跳转到登录前的页面
+                query: {redirect: to.fullPath},
+            })
+        }
+    } else {
+        next()
+    }
 })
