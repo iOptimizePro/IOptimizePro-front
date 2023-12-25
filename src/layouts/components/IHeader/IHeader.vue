@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import IAvatar from '@/layouts/components/IAvatar/IAvatar.vue'
 import { useAppStore } from '@/stores'
+import IAlert from '@/layouts/components/IAlert/IAlert.vue'
 
 const appStore = useAppStore()
 const emit = defineEmits(['update:openDrawer', 'update:menuCollapsed'])
+const activeKey = ref('1')
 const props = defineProps<{
   openDrawer: boolean
   menuCollapsed?: boolean
@@ -73,9 +75,7 @@ const propsMenuCollapsed = computed({
           <Icon icon="LockOutlined" />
           {{ $t('role.analyst') }}&nbsp;&nbsp;
         </div>
-        <a-button class="alert" type="text">
-          <Icon icon="AlertOutlined" />
-        </a-button>
+        <i-alert v-model:activeKey="activeKey" />
         <i-avatar />
       </div>
     </div>
@@ -174,19 +174,6 @@ const propsMenuCollapsed = computed({
         }
         @media screen and (max-width: 768px) {
           display: none;
-        }
-      }
-
-      .alert {
-        width: 35px;
-        height: 35px;
-        margin-right: 10px;
-        font-size: 16px;
-        padding: 2px;
-        border: 1px #eee solid;
-        border-radius: 999px;
-        @include useTheme {
-          color: getModeVar('textColor');
         }
       }
     }

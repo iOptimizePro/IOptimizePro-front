@@ -122,7 +122,7 @@ const columns = ref([
 
 .data-warehouse {
   .table-panel {
-    width: calc(100% - 50px);
+    width: calc(100% - 20px);
     margin-top: 20px;
 
     .table-container {

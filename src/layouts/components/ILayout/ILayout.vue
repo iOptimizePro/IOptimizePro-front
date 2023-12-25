@@ -108,7 +108,7 @@ watch(
     }
     tabList.value.push(item)
   },
-  { immediate: true, deep: true },
+  { immediate: true },
 )
 
 /**
@@ -180,10 +180,10 @@ window.addEventListener('resize', handleWindowResize)
             </template>
           </a-tabs>
         </a-config-provider>
-        <a-layout-content style="margin: 0 10px 10px 10px">
+        <a-layout-content class="a-layout-content">
           <slot></slot>
         </a-layout-content>
-        <a-layout-footer style=""> iOptimize 2023 Created by 智造前沿 </a-layout-footer>
+        <a-layout-footer style=""> iOptimize 2023 Created by 智造前沿</a-layout-footer>
       </a-layout>
     </a-layout>
 
@@ -206,6 +206,8 @@ window.addEventListener('resize', handleWindowResize)
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
 .basic-layout {
   .ant-layout {
     --footer-padding: 10px;
@@ -239,6 +241,14 @@ window.addEventListener('resize', handleWindowResize)
     .inner-layout {
       @media screen and (max-width: 768px) {
         margin-left: 0;
+      }
+
+      .a-layout-content {
+        margin: 0;
+        padding: 10px;
+        @include useTheme {
+          background: getModeVar('containerBgColor');
+        }
       }
     }
   }
