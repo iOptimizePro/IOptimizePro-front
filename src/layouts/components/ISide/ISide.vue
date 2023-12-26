@@ -53,9 +53,16 @@ const propsCollapsed = computed({
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
 .i-side {
   overflow: auto;
   height: 100vh;
+  box-sizing: border-box;
+  @include useTheme {
+    box-shadow: 2px 0 6px getModeVar('boxShadowColor');
+  }
+  z-index: 99;
 
   .logo {
     display: flex;

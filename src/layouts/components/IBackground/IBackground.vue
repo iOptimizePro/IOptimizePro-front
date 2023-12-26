@@ -23,7 +23,7 @@ onMounted(() => {
 function reCreate() {
   perlinNoise = null
   // @ts-ignore
-  const iBackgroundDom = document.querySelector('.i-background') as HTMLElement
+  const iBackgroundDom = document.querySelector('.i-background') || ({} as HTMLElement)
   iBackgroundDom.innerHTML = ''
   options.Background = appStore.darkMode === 'dark' ? '#000000' : '#ffffff'
   perlinNoise = new PerlinNoise('.i-background', options)
