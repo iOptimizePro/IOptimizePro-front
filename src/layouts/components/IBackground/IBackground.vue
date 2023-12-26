@@ -1,55 +1,43 @@
-<script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
-import PerlinNoise from '@/layouts/components/IBackground/PerlinNoise/PerlinNoise'
-import { useAppStore } from '@/stores'
-
-const appStore = useAppStore()
-const options = reactive({
-  Background: appStore.darkMode === 'dark' ? '#000000' : '#ffffff',
-  Color1: '#63ffeb',
-  Color2: '#0799f2',
-  Color3: '#57ccff',
-  Length: 5,
-  Nums: 400,
-  Size: 2,
-  noiseScale: 800,
-  ColorMode: 'Linear Gradient',
-})
-let perlinNoise: any
-onMounted(() => {
-  perlinNoise = new PerlinNoise('.i-background', options)
-})
-
-function reCreate() {
-  perlinNoise = null
-  // @ts-ignore
-  const iBackgroundDom = document.querySelector('.i-background') as HTMLElement
-  iBackgroundDom.innerHTML = ''
-  options.Background = appStore.darkMode === 'dark' ? '#000000' : '#ffffff'
-  perlinNoise = new PerlinNoise('.i-background', options)
-}
-
-defineExpose({
-  reCreate,
-})
-
-window.addEventListener('resize', () => {
-  reCreate()
-})
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div class="i-background"></div>
+  <div class="i-background">
+    <img class="bg-main" src="@/assets/images/bg2.svg" />
+    <img class="bg-bg" src="@/assets/images/bg2-bg.svg" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
 .i-background {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #dddddd;
+  background: #ffffff;
+  //@include useTheme {
+  //  background: getModeVar('bg1color');
+  //}
   z-index: -1;
+  overflow: hidden;
+
+  .bg-main {
+    position: absolute;
+    left: 10%;
+    bottom: 0;
+    //width: 60%;
+    height: 85%;
+    object-fit: contain;
+    object-position: left center;
+    z-index: 1;
+  }
+
+  .bg-bg {
+    position: absolute;
+    right: 0;
+    height: 100%;
+  }
 }
 </style>

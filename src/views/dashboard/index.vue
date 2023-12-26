@@ -191,7 +191,7 @@ const columns = ref([
 
       .card-item {
         //min-width: 270px;
-        border-radius: 20px;
+        border-radius: 10px;
         margin: 10px;
         color: #ffffff;
         $colors: (
@@ -247,7 +247,7 @@ const columns = ref([
     }
 
     .table-panel {
-      width: calc(100% - 50px);
+      width: calc(100% - 20px);
       margin-top: 20px;
 
       .table-container {
