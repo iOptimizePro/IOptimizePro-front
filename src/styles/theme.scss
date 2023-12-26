@@ -3,6 +3,7 @@
 $modes: (
         light: (
                 bgColor: #f4f4f4,
+                bg1color: #fff,
                 cardBgColor: #fff,
                 containerBgColor: #f4f4f4,
                 boxShadowColor: rgba(0, 0, 0, 0.1),
@@ -11,6 +12,7 @@ $modes: (
         ),
         dark: (
                 bgColor: #000,
+                bg1color: #000,
                 cardBgColor: #141414,
                 containerBgColor: #050505,
                 boxShadowColor: rgba(255, 255, 255, 0.1),

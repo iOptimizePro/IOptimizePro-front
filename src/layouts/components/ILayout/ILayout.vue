@@ -176,7 +176,7 @@ window.addEventListener('resize', handleWindowResize)
             @edit="handleTabEdit"
           >
             <template v-for="item in tabList" :key="item">
-              <a-tab-pane v-if="item" :key="item.path" :closable="tabList.length > 1" :tab="item.name" />
+              <a-tab-pane v-if="item" :key="item.path" :closable="tabList.length > 1" :tab="item.meta.title" />
             </template>
           </a-tabs>
         </a-config-provider>
