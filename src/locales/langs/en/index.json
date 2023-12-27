@@ -88,8 +88,8 @@
     "center": {
       "title": "User Center"
     },
-    "setting": {
-      "title": "Setting"
+    "alert": {
+      "title": "Alert Message"
     },
     "logout": "Logout"
   },

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import ITable from '@/components/ITable/ITable.vue'
 
 const dataSource = ref([
   {
@@ -123,32 +124,26 @@ const columns = ref([
           </div>
         </a-card>
       </div>
-      <div class="table-panel">
-        <a-table :columns="columns" :data-source="dataSource" :scroll="{ x: 1200 }" class="table-container">
-          <template #title>
-            <div class="table-title">
-              <div class="table-title-left">
-                <Icon icon="ContactsOutlined" />
-                任务列表
-              </div>
-              <div class="table-title-right">
-                <a-button type="primary">
-                  <Icon icon="PlusCircleOutlined" />
-                  新建任务
-                </a-button>
-              </div>
-            </div>
-          </template>
-          <template #action>
-            <a-button type="link">
-              <Icon icon="EditOutlined" />
-            </a-button>
-            <a-button type="link">
-              <Icon icon="DeleteOutlined" />
-            </a-button>
-          </template>
-        </a-table>
-      </div>
+      <i-table :columns="columns" :data-source="dataSource">
+        <template #title-left>
+          <Icon icon="ContactsOutlined" />
+          任务列表
+        </template>
+        <template #title-right>
+          <a-button type="primary">
+            <Icon icon="PlusCircleOutlined" />
+            新建任务
+          </a-button>
+        </template>
+        <template #action>
+          <a-button type="link">
+            <Icon icon="EditOutlined" />
+          </a-button>
+          <a-button type="link">
+            <Icon icon="DeleteOutlined" />
+          </a-button>
+        </template>
+      </i-table>
     </div>
   </div>
 </template>
@@ -241,51 +236,6 @@ const columns = ref([
             font-size: 30px;
             font-weight: 600;
             border: 1px #ffffff solid;
-          }
-        }
-      }
-    }
-
-    .table-panel {
-      width: calc(100% - 20px);
-      margin-top: 20px;
-
-      .table-container {
-        width: 100%;
-
-        :deep(.ant-table-title) {
-          padding: 10px 0 0 0;
-        }
-
-        :deep(.ant-table-cell) {
-          @include useTheme {
-            background: getModeVar('cardBgColor');
-          }
-          //color: #1677ff;
-        }
-
-        :deep(th.ant-table-cell) {
-          color: #1677ff;
-          font-size: 18px;
-        }
-
-        .table-title {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 10px 10px 10px;
-          border-bottom: 2px #1677ff solid;
-          color: #1677ff;
-
-          .table-title-left {
-            font-size: 20px;
-            font-weight: 600;
-          }
-
-          .table-title-right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
           }
         }
       }
