@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue'
 
 const activeKey = ref('1')
 const isMobile = ref(window.innerWidth < 768)
-const userInfoForm = reactive({})
+const userInfoForm = reactive<any>({})
 window.addEventListener('resize', () => {
   isMobile.value = window.innerWidth < 768
 })
