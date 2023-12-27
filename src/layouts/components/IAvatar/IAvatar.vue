@@ -28,11 +28,11 @@ function logout() {
         <a-menu>
           <a-menu-item key="1">
             <Icon icon="UserOutlined" />
-            <router-link to="/">&nbsp;{{ $t('user.center.title') }}</router-link>
+            <router-link to="/personalInformationManagement">&nbsp;{{ $t('user.center.title') }}</router-link>
           </a-menu-item>
           <a-menu-item key="2">
-            <Icon icon="SettingOutlined" />
-            <router-link to="/">&nbsp;{{ $t('user.setting.title') }}</router-link>
+            <Icon icon="AlertOutlined" />
+            <router-link to="/notificationManagement">&nbsp;{{ $t('user.alert.title') }}</router-link>
           </a-menu-item>
           <a-menu-divider />
           <a-menu-item key="3">

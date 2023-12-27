@@ -611,7 +611,7 @@ export function getAsyncRouterMap(): IRouter[] {
             title: '个人信息管理',
             requireAuth: true,
           },
-          component: () => import('@/views/dashboard/index.vue'),
+          component: () => import('@/views/user/center/index.vue'),
         },
         {
           name: '通知管理',
@@ -621,7 +621,7 @@ export function getAsyncRouterMap(): IRouter[] {
             title: '通知管理',
             requireAuth: true,
           },
-          component: () => import('@/views/dashboard/index.vue'),
+          component: () => import('@/views/user/alert/index.vue'),
         },
         {
           name: '任务管理',
@@ -631,7 +631,7 @@ export function getAsyncRouterMap(): IRouter[] {
             title: '任务管理',
             requireAuth: true,
           },
-          component: () => import('@/views/dashboard/index.vue'),
+          component: () => import('@/views/user/task/index.vue'),
         },
         {
           name: '帮助与支持',

@@ -174,7 +174,7 @@ watch(
     width: 470px;
     margin: 0 auto;
     left: 20vw;
-    padding: 20px;
+    padding: 10px;
     background: #ffffff;
     //@include useTheme {
     //  background: getModeVar('cardBgColor');

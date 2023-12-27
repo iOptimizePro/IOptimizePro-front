@@ -88,8 +88,8 @@
     "center": {
       "title": "用户中心"
     },
-    "setting": {
-      "title": "个人设置"
+    "alert": {
+      "title": "系统提示"
     },
     "logout": "退出登录"
   },
