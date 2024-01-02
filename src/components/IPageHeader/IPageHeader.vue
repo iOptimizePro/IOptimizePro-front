@@ -12,7 +12,10 @@ defineProps({
 </script>
 
 <template>
-  <a-page-header :sub-title="subTitle" :title="title" class="page-header" />
+  <div class="page-header">
+    <a-page-header :sub-title="subTitle" :title="title" class="page-header" />
+    <slot></slot>
+  </div>
 </template>
 
 <style lang="scss" scoped>

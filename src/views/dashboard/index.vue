@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import ITable from '@/components/ITable/ITable.vue'
+import IPageHeader from '@/components/IPageHeader/IPageHeader.vue'
 
 const dataSource = ref([
   {
@@ -85,7 +86,19 @@ const columns = ref([
 <template>
   <div class="dashboard">
     <div class="content">
-      <div class="title">{{ $t('app.welcome') }}</div>
+      <i-page-header :sub-title="$t('app.welcome')" class="dashboard-page-header" style="width: 100%" title="USERNAME">
+        <div class="header-wrapper">
+          <div class="avatar">
+            <div class="avatar-img">
+              <Icon icon="UserOutlined" />
+            </div>
+          </div>
+          <div class="title-wrapper">
+            <div class="title">早安, USERNAME, 开始您一天的工作吧！</div>
+            <div class="sub-title">今日晴，20℃ - 32℃！</div>
+          </div>
+        </div>
+      </i-page-header>
       <div class="card-panel">
         <a-card class="card-item" hoverable>
           <div class="card-item-title">本月新增任务</div>
@@ -115,9 +128,9 @@ const columns = ref([
           </div>
         </a-card>
         <a-card class="card-item" hoverable>
-          <div class="card-item-title">数据仓数量</div>
+          <div class="card-item-title">最新通知</div>
           <div class="card-item-content">
-            <div class="card-item-statics">$56K</div>
+            <div class="card-item-statics">99+</div>
             <div class="card-item-icon">
               <Icon icon="UserOutlined" />
             </div>
@@ -164,17 +177,83 @@ const columns = ref([
       padding: 0;
     }
 
-    .title {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 20px;
+    .dashboard-page-header {
+      width: 100%;
+      @include useTheme {
+        background: getModeVar('cardBgColor');
+      }
+
+      .header-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .avatar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 70px;
+          height: 70px;
+          border-radius: 999px;
+          background: #ffffff;
+          margin-right: 20px;
+
+          @media screen and (max-width: 768px) {
+            margin-right: 0;
+            margin-bottom: 20px;
+          }
+
+          .avatar-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 999px;
+            background: #1677ff;
+            font-size: 30px;
+            color: #ffffff;
+          }
+        }
+
+        .title-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          width: 100%;
+          height: 100%;
+
+          .title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+          }
+
+          .sub-title {
+            font-size: 14px;
+            font-weight: 400;
+            color: #999999;
+          }
+        }
+      }
     }
 
     .card-panel {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-      padding: 15px;
+      margin-top: 10px;
 
       @media screen and (max-width: 1600px) {
         grid-template-columns: 1fr 1fr;
