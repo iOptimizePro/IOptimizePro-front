@@ -83,4 +83,9 @@ const propsCollapsed = computed({
     }
   }
 }
+
+// 不显示默认的 收起菜单 trigger
+:deep(.ant-layout-sider-trigger) {
+  display: none !important;
+}
 </style>
