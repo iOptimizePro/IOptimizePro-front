@@ -37,7 +37,7 @@ defineProps<{
 
 .table-panel {
   width: calc(100% - 20px);
-  margin: 20px 10px;
+  margin: 10px;
 
   .table-container {
     width: 100%;

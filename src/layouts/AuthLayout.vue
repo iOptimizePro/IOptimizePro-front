@@ -186,6 +186,10 @@ watch(
     //  box-shadow: 0 0 10px rgba(getModeVar('infoColor'), 0.1);
     //}
 
+    @media screen and (max-width: 1280px) {
+      left: 0;
+    }
+
     @media screen and (max-width: 768px) {
       width: 100%;
       left: 0;
@@ -202,6 +206,7 @@ watch(
   }
 }
 
+//修改ant-design样式
 :deep(.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap) {
   display: flex !important;
   justify-content: center !important;

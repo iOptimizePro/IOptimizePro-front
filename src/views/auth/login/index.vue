@@ -1,9 +1,12 @@
 <script lang="ts" setup>
-import { nextTick, reactive, ref } from 'vue'
+import { h, nextTick, reactive, ref } from 'vue'
 import { useRequest } from 'alova'
 import { getCodeImgApi, loginApi } from '@/apis/auth'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores'
+import { notification } from 'ant-design-vue'
+import i18n from '@/locales'
+import { SmileOutlined } from '@ant-design/icons-vue'
 
 declare type FormState = {
   tenant: string
@@ -50,6 +53,12 @@ onSuccess((event) => {
     // 获取当前路由的参数, 跳转到指定页面
     const { redirect } = router.currentRoute.value.query
     router.push((redirect as string) || '/')
+    // 显示欢迎信息
+    notification.open({
+      message: i18n.global.t('app.title'),
+      description: i18n.global.t('app.welcome'),
+      icon: () => h(SmileOutlined, { style: 'color: #108ee9' }),
+    })
   }
 })
 
