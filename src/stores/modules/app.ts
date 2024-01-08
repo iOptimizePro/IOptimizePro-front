@@ -12,15 +12,19 @@ import { syncAsyncRoute } from '@/router'
 export const useAppStore = defineStore(
   'app',
   () => {
-    const themeName = ref<primaryColorEnumType>('origin') // 主题名称
-    const locale = ref<'zhCN' | 'enUS'>('zhCN') // 语言
+    // 主题名称
+    const themeName = ref<primaryColorEnumType>('origin')
+    // 语言
+    const locale = ref<'zhCN' | 'enUS'>('zhCN')
     const localeComp = computed(() => {
       const { locale: iLocale } = useI18n()
       iLocale.value = locale.value
+      document.documentElement.setAttribute('lang', locale.value.substring(0, 2))
       syncAsyncRoute()
       return locale.value
     })
-    const darkModeRef = ref<'dark' | 'light'>('light') // 颜色模式
+    // 颜色模式
+    const darkModeRef = ref<'dark' | 'light'>('light')
     const darkMode = computed({
       get() {
         return darkModeRef.value
@@ -30,8 +34,8 @@ export const useAppStore = defineStore(
         document.documentElement.setAttribute('data-dark', darkModeRef.value)
       },
     })
+    // 主题配置
     const themeConfig = computed(() => {
-      // 主题配置
       document.documentElement.setAttribute('data-theme', themeName.value)
       // @ts-ignore
       return {
