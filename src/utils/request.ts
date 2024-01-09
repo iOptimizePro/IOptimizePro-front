@@ -31,7 +31,7 @@ const errCode = {
   500: '服务器错误',
 }
 
-// 1. 创建alova实例
+// 创建alova实例
 const request = createAlova({
   baseURL,
   // VueHook用于创建ref状态，包括请求状态loading、响应数据data、请求错误对象error等
