@@ -5,6 +5,7 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import enUS from 'ant-design-vue/es/locale/en_US'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
+import { executeAfterImagesLoaded } from '@/utils/utils'
 
 const lang = {
   zhCN: zhCN,
@@ -16,7 +17,11 @@ const aLocale = computed(() => lang[app.localeComp])
 dayjs.locale(app.locale)
 // 加载完成
 nextTick(() => {
-  setTimeout(() => document.dispatchEvent(new CustomEvent('loaded')), 2000)
+  setTimeout(() => {
+    executeAfterImagesLoaded(() => {
+      document.dispatchEvent(new CustomEvent('loaded'))
+    })
+  }, 2000)
 })
 </script>
 
