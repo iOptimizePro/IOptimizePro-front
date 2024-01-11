@@ -88,26 +88,28 @@ const columns = ref([
       <a-card title="数据仓">
         <p>管理和处理数据仓</p>
       </a-card>
-      <i-table :columns="columns" :data-source="dataSource">
-        <template #title-left>
-          <Icon icon="ContactsOutlined" />
-          任务列表
-        </template>
-        <template #title-right>
-          <a-button type="primary">
-            <Icon icon="PlusCircleOutlined" />
-            新建任务
-          </a-button>
-        </template>
-        <template #action>
-          <a-button type="link">
-            <Icon icon="EditOutlined" />
-          </a-button>
-          <a-button type="link">
-            <Icon icon="DeleteOutlined" />
-          </a-button>
-        </template>
-      </i-table>
+      <a-card>
+        <i-table :columns="columns" :data-source="dataSource">
+          <template #title-left>
+            <Icon icon="ContactsOutlined" />
+            任务列表
+          </template>
+          <template #title-right>
+            <a-button type="primary">
+              <Icon icon="PlusCircleOutlined" />
+              新建任务
+            </a-button>
+          </template>
+          <template #action>
+            <a-button type="link">
+              <Icon icon="EditOutlined" />
+            </a-button>
+            <a-button type="link">
+              <Icon icon="DeleteOutlined" />
+            </a-button>
+          </template>
+        </i-table>
+      </a-card>
     </a-space>
   </div>
 </template>

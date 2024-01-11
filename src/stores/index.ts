@@ -1,4 +1,4 @@
-import {createPinia} from 'pinia'
+import { createPinia } from 'pinia'
 import persist from 'pinia-plugin-persistedstate'
 
 // 创建 pinia 实例

@@ -13,10 +13,27 @@ const menuConfig = reactive({
   menuListArr: convertToRouterArray(asyncRouterMap.value), // 菜单列表数组
   collapsed: false, // 侧边栏收起
   selectedKeys: [] as string[], // 侧边栏选中的key
+  openKeys: [] as string[], // 侧边栏展开的key
   openDrawer: false, // 移动端侧边栏
+  hideSide: false, // 隐藏侧边栏
   sideWidth: 240, // 侧边栏宽度
 })
 const tabList = ref<IRouter[]>([])
+const tabConfig = reactive({
+  components: {
+    Tabs: {
+      borderRadius: 10,
+      colorBgContainer: '#1677ff',
+      colorText: '#4096ff',
+      colorPrimary: '#fff',
+      fontSize: 14,
+      padding: 10,
+      margin: 0,
+      controlHeight: 30,
+      controlHeightLG: 30,
+    },
+  },
+})
 
 /**
  * 将菜单列表转换为数组
@@ -48,13 +65,6 @@ function init() {
     menuConfig.selectedKeys = [item.path]
   }
 }
-
-onMounted(() => {
-  init()
-  if (window.innerWidth < 1200) {
-    menuConfig.collapsed = true
-  }
-})
 
 /**
  * 处理tab切换
@@ -93,6 +103,29 @@ function handleTabEdit(activeKey: string, action: 'add' | 'remove') {
 }
 
 /**
+ * 找到子元素的所有父元素
+ */
+function findParentPath(path: string, routers: IRouter[]): any {
+  for (const route of routers) {
+    if (route.path === path) {
+      return []
+    }
+
+    if (route.children) {
+      // 递归查找子元素的父元素
+      const parentRoutes = findParentPath(path, route.children)
+      if (parentRoutes) {
+        // 如果找到了父元素，将当前路由对象添加到父元素数组中并返回
+        return [...parentRoutes, route]
+      }
+    }
+  }
+
+  // 如果没有找到匹配的父元素，返回 undefined
+  return undefined
+}
+
+/**
  * 处理路由变化 向tabList中添加tab
  */
 watch(
@@ -112,6 +145,20 @@ watch(
 )
 
 /**
+ * 处理侧边栏展开
+ */
+watch(
+  () => menuConfig.selectedKeys,
+  (selectedKeys) => {
+    const item = menuConfig.menuListArr.find((item) => item.path === selectedKeys[0])
+    if (item) {
+      menuConfig.openKeys = findParentPath(item.path, menuConfig.menuListArr)?.map((item: any) => item.path) || []
+    }
+  },
+  { immediate: true },
+)
+
+/**
  * 处理页面布局
  */
 function handleWindowResize() {
@@ -121,52 +168,69 @@ function handleWindowResize() {
   const width = window.innerWidth
   // 页面宽度小于768px时，打开移动端侧边栏
   if (width < md) {
+    changeTabConfig(true)
+    menuConfig.hideSide = true
     menuConfig.openDrawer = false
-    menuConfig.collapsed = true
+    menuConfig.collapsed = false
+    console.log(menuConfig.collapsed)
     // 页面宽度小于1200px时，侧边栏收起, 移动端侧边栏关闭
   } else if (width > md && width < lg) {
+    changeTabConfig(false)
+    menuConfig.hideSide = false
     menuConfig.openDrawer = false
     menuConfig.collapsed = true
     // 页面宽度大于1200px时，侧边栏展开
   } else if (width > lg) {
+    changeTabConfig(false)
+    menuConfig.hideSide = false
     menuConfig.collapsed = false
   }
 }
 
+/**
+ * 修改Tab栏的样式
+ * @param isMobile 是否是移动端
+ */
+function changeTabConfig(isMobile: boolean) {
+  if (isMobile) {
+    tabConfig.components.Tabs.controlHeight = 25
+    tabConfig.components.Tabs.controlHeightLG = 25
+    tabConfig.components.Tabs.fontSize = 12
+    tabConfig.components.Tabs.padding = 6
+  } else {
+    tabConfig.components.Tabs.controlHeight = 30
+    tabConfig.components.Tabs.controlHeightLG = 30
+    tabConfig.components.Tabs.fontSize = 14
+    tabConfig.components.Tabs.padding = 10
+  }
+}
+
 window.addEventListener('resize', handleWindowResize)
+
+/**
+ * 页面加载完成后初始化
+ */
+onMounted(() => {
+  init()
+  handleWindowResize()
+})
 </script>
 
 <template>
   <div class="basic-layout">
-    <a-layout class="layout">
+    <a-layout>
       <i-side
         v-model:collapsed="menuConfig.collapsed"
         v-model:selected-keys="menuConfig.selectedKeys"
+        v-model:open-keys="menuConfig.openKeys"
         :collapsible="true"
         :menu-list="menuConfig.menuList"
-        :side-width="menuConfig.sideWidth"
-        class="inner-side"
+        :width="menuConfig.hideSide ? 0 : menuConfig.sideWidth"
       />
       <a-layout class="inner-layout">
         <i-header v-model:menu-collapsed="menuConfig.collapsed" v-model:open-drawer="menuConfig.openDrawer" />
         <!--使用a-config-provider修改单个组件的样式 TODO-->
-        <a-config-provider
-          :theme="{
-            components: {
-              Tabs: {
-                borderRadius: 10,
-                colorBgContainer: '#1677ff',
-                colorText: '#4096ff',
-                colorPrimary: '#fff',
-                fontSize: 12,
-                padding: 6,
-                margin: 0,
-                controlHeight: 25,
-                controlHeightLG: 25,
-              },
-            },
-          }"
-        >
+        <a-config-provider :theme="tabConfig">
           <!--页面切换的Tab栏-->
           <a-tabs
             v-model:active-key="menuConfig.selectedKeys[0]"
@@ -183,7 +247,10 @@ window.addEventListener('resize', handleWindowResize)
         <a-layout-content class="a-layout-content">
           <slot></slot>
         </a-layout-content>
-        <a-layout-footer style=""> iOptimize 2023 Created by 智造前沿</a-layout-footer>
+        <a-layout-footer>
+          <div class="title">iOptimize 2023 Created by 智造前沿</div>
+          <div class="version">版本号：1.0.0</div>
+        </a-layout-footer>
       </a-layout>
     </a-layout>
 
@@ -197,9 +264,10 @@ window.addEventListener('resize', handleWindowResize)
     >
       <i-side
         v-model:selected-keys="menuConfig.selectedKeys"
+        v-model:open-keys="menuConfig.openKeys"
         :collapsible="false"
         :menu-list="menuConfig.menuList"
-        :side-width="menuConfig.sideWidth"
+        :width="menuConfig.sideWidth"
       />
     </a-drawer>
   </div>
@@ -212,29 +280,15 @@ window.addEventListener('resize', handleWindowResize)
   .ant-layout {
     --footer-padding: 10px;
 
-    .ant-layout-header {
-      background: #fff;
-      color: #000;
-    }
-
-    .ant-layout-content {
-      margin: 20px 16px;
-      overflow: auto;
-      max-height: calc(100vh - 70px - var(--footer-padding) * 2 - 20px - 30px);
-    }
-
-    .ant-layout-footer {
-      text-align: center;
-      padding: var(--footer-padding) 50px;
-    }
-  }
-
-  .layout {
     min-height: 100vh;
+    @include useTheme {
+      background-color: getModeVar('bgColor');
+    }
 
-    .inner-side {
-      @media screen and (max-width: 768px) {
-        display: none;
+    .ant-layout-header {
+      @include useTheme {
+        background-color: getModeVar('cardBgColor');
+        color: getModeVar('infoColor');
       }
     }
 
@@ -246,8 +300,44 @@ window.addEventListener('resize', handleWindowResize)
       .a-layout-content {
         margin: 0;
         padding: 10px;
+        overflow: auto;
+        max-height: calc(100vh - 70px - var(--footer-padding) * 2 - 20px - 30px);
         @include useTheme {
           background: getModeVar('containerBgColor');
+        }
+      }
+
+      .ant-layout-footer {
+        text-align: center;
+        //padding: var(--footer-padding) 5px;
+        padding: calc(var(--footer-padding) + 5px) 10px;
+        //position: fixed;
+        //width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include useTheme {
+          background-color: getModeVar('bg1color');
+          color: getModeVar('infoColor');
+          border-top: 1px solid getModeVar('borderColor');
+        }
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .title {
+          @media screen and (max-width: 768px) {
+            font-size: 12px;
+          }
+        }
+
+        .version {
+          @media screen and (max-width: 768px) {
+            font-size: 10px;
+          }
         }
       }
     }

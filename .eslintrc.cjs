@@ -56,7 +56,7 @@ module.exports = {
     camelcase: 'warn', // 要求使用骆驼拼写法命名约定
     'max-depth': ['warn', 4], // 要求可嵌套的块的最大深度4
     'max-nested-callbacks': ['warn', 3], // 要求回调函数最大嵌套深度3
-    'max-statements-per-line': ['warn', {max: 1}], // 要求每一行中所允许的最大语句数量
+    'max-statements-per-line': ['warn', { max: 1 }], // 要求每一行中所允许的最大语句数量
     quotes: ['error', 'single', 'avoid-escape'], // 要求统一使用单引号符号
     'vue/require-default-prop': 0, // 关闭属性参数必须默认值
     'vue/singleline-html-element-content-newline': 0, // 关闭单行元素必须换行符

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import IPageHeader from '@/components/IPageHeader/IPageHeader.vue'
 import ITable from '@/components/ITable/ITable.vue'
 
 const dataSource = ref([
@@ -77,37 +76,43 @@ const rowSelection = reactive({
 
 <template>
   <div class="alert-manage-panel">
-    <i-page-header sub-title="管理接收和查看系统通知" title="消息管理" />
-    <i-table :columns="columns" :data-source="dataSource" :row-selection="rowSelection">
-      <template #title-left>
-        <a-form layout="inline">
-          <a-form-item label="类型">
-            <a-select placeholder="请选择" style="width: 100px">
-              <a-select-option value="1">全部</a-select-option>
-              <a-select-option value="2">系统通知</a-select-option>
-              <a-select-option value="3">消息提醒</a-select-option>
-            </a-select>
-          </a-form-item>
-          <a-form-item label="状态">
-            <a-select placeholder="请选择" style="width: 100px">
-              <a-select-option value="1">全部</a-select-option>
-              <a-select-option value="2">已读</a-select-option>
-              <a-select-option value="3">未读</a-select-option>
-            </a-select>
-          </a-form-item>
-          <a-form-item v-if="rowSelection.selectedRowKeys.length > 0">
-            已选择{{ rowSelection.selectedRowKeys.length }}项
-          </a-form-item>
-        </a-form>
-      </template>
-      <template #title-right>
-        <a-button style="margin-left: 30px" type="primary"> 标记为已读</a-button>
-      </template>
-      <template #action>
-        <a-button type="link"> 查看</a-button>
-        <a-button type="link"> 删除</a-button>
-      </template>
-    </i-table>
+    <a-space direction="vertical" size="large" style="width: 100%">
+      <a-card title="消息管理">
+        <p>管理接收和查看系统通知</p>
+      </a-card>
+      <a-card>
+        <i-table :columns="columns" :data-source="dataSource" :row-selection="rowSelection">
+          <template #title-left>
+            <a-form layout="inline">
+              <a-form-item label="类型">
+                <a-select placeholder="请选择" style="width: 100px">
+                  <a-select-option value="1">全部</a-select-option>
+                  <a-select-option value="2">系统通知</a-select-option>
+                  <a-select-option value="3">消息提醒</a-select-option>
+                </a-select>
+              </a-form-item>
+              <a-form-item label="状态">
+                <a-select placeholder="请选择" style="width: 100px">
+                  <a-select-option value="1">全部</a-select-option>
+                  <a-select-option value="2">已读</a-select-option>
+                  <a-select-option value="3">未读</a-select-option>
+                </a-select>
+              </a-form-item>
+              <a-form-item v-if="rowSelection.selectedRowKeys.length > 0">
+                已选择{{ rowSelection.selectedRowKeys.length }}项
+              </a-form-item>
+            </a-form>
+          </template>
+          <template #title-right>
+            <a-button style="margin-left: 30px" type="primary"> 标记为已读</a-button>
+          </template>
+          <template #action>
+            <a-button type="link"> 查看</a-button>
+            <a-button type="link"> 删除</a-button>
+          </template>
+        </i-table>
+      </a-card>
+    </a-space>
   </div>
 </template>
 

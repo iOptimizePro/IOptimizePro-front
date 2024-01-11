@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import IAvatar from '@/layouts/components/IAvatar/IAvatar.vue'
 import { useAppStore } from '@/stores'
 import IAlert from '@/layouts/components/IAlert/IAlert.vue'
+import { useVModel } from '@vueuse/core'
 
 const appStore = useAppStore()
 const emit = defineEmits(['update:openDrawer', 'update:menuCollapsed'])
@@ -11,14 +12,8 @@ const props = defineProps<{
   openDrawer: boolean
   menuCollapsed?: boolean
 }>()
-const propsOpenDrawer = computed({
-  get: () => props.openDrawer,
-  set: (val) => emit('update:openDrawer', val),
-})
-const propsMenuCollapsed = computed({
-  get: () => props.menuCollapsed,
-  set: (val) => emit('update:menuCollapsed', val),
-})
+const propsOpenDrawer = useVModel(props, 'openDrawer', emit)
+const propsMenuCollapsed = useVModel(props, 'menuCollapsed', emit)
 </script>
 
 <template>

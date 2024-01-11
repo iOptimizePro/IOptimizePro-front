@@ -19,12 +19,12 @@ app.use(router)
 app.use(pinia)
 app.use(i18n)
 app.use(VueTransitions, {
-    // Plugin options (optional, described below)
+  // Plugin options (optional, described below)
 })
 app.component(Icon)
 // 注册全局图标
 Object.keys(Icons).forEach((key) => {
-    app.component(key, Icons[key])
+  app.component(key, Icons[key])
 })
 
 app.mount('#app')

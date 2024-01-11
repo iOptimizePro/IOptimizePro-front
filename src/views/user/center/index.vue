@@ -148,9 +148,11 @@ window.addEventListener('resize', () => {
 @import '@/styles/theme.scss';
 
 .user-center {
+  $panel-width: calc(500px + 20vw);
   padding: 20px;
   @include useTheme {
     background: getModeVar('cardBgColor');
+    border: 1px solid getModeVar('borderColor');
   }
 
   .user-info {
@@ -208,6 +210,13 @@ window.addEventListener('resize', () => {
           margin-bottom: 20px;
         }
       }
+    }
+  }
+
+  :deep(.ant-tabs-content) {
+    width: $panel-width;
+    @media screen and (max-width: 768px) {
+      width: 100%;
     }
   }
 }
