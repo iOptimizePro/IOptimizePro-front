@@ -183,7 +183,10 @@ window.addEventListener('resize', handleWindowResize)
         <a-layout-content class="a-layout-content">
           <slot></slot>
         </a-layout-content>
-        <a-layout-footer style=""> iOptimize 2023 Created by 智造前沿</a-layout-footer>
+        <a-layout-footer>
+          <div class="title">iOptimize 2023 Created by 智造前沿</div>
+          <div class="version">版本号：1.0.0</div>
+        </a-layout-footer>
       </a-layout>
     </a-layout>
 
@@ -211,10 +214,15 @@ window.addEventListener('resize', handleWindowResize)
 .basic-layout {
   .ant-layout {
     --footer-padding: 10px;
+    @include useTheme {
+      background-color: getModeVar('bgColor');
+    }
 
     .ant-layout-header {
-      background: #fff;
-      color: #000;
+      @include useTheme {
+        background-color: getModeVar('cardBgColor');
+        color: getModeVar('infoColor');
+      }
     }
 
     .ant-layout-content {
@@ -225,7 +233,36 @@ window.addEventListener('resize', handleWindowResize)
 
     .ant-layout-footer {
       text-align: center;
-      padding: var(--footer-padding) 50px;
+      //padding: var(--footer-padding) 5px;
+      padding: calc(var(--footer-padding) + 5px) 10px;
+      //position: fixed;
+      //width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @include useTheme {
+        background-color: getModeVar('bg1color');
+        color: getModeVar('infoColor');
+        border-top: 1px solid getModeVar('borderColor');
+      }
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .title {
+        @media screen and (max-width: 768px) {
+          font-size: 12px;
+        }
+      }
+
+      .version {
+        @media screen and (max-width: 768px) {
+          font-size: 10px;
+        }
+      }
     }
   }
 

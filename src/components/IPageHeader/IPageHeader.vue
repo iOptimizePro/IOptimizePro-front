@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="page-header">
+  <div class="page-header-wrapper">
     <a-page-header :sub-title="subTitle" :title="title" class="page-header" />
     <slot></slot>
   </div>
@@ -21,9 +21,10 @@ defineProps({
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
 
-.page-header {
+.page-header-wrapper {
   @include useTheme {
     background: getModeVar('cardBgColor');
+    border: 1px solid getModeVar('borderColor');
   }
 }
 </style>

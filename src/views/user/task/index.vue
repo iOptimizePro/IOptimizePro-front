@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import IPageHeader from '@/components/IPageHeader/IPageHeader.vue'
 import ITable from '@/components/ITable/ITable.vue'
 import { ref } from 'vue'
 
@@ -55,27 +54,33 @@ const columns = ref([
 
 <template>
   <div class="task-manage-panel">
-    <i-page-header sub-title="管理个人任务列表，一键式查看任务情况" title="任务管理" />
-    <i-table :columns="columns" :data-source="dataSource">
-      <template #title-left>
-        <Icon icon="ContactsOutlined" />
-        任务列表
-      </template>
-      <template #title-right>
-        <a-button type="primary">
-          <Icon icon="PlusCircleOutlined" />
-          新建任务
-        </a-button>
-      </template>
-      <template #action>
-        <a-button type="link">
-          <Icon icon="EditOutlined" />
-        </a-button>
-        <a-button type="link">
-          <Icon icon="DeleteOutlined" />
-        </a-button>
-      </template>
-    </i-table>
+    <a-space direction="vertical" size="large" style="width: 100%">
+      <a-card title="任务管理">
+        <p>管理个人任务列表，一键式查看任务情况</p>
+      </a-card>
+      <a-card>
+        <i-table :columns="columns" :data-source="dataSource">
+          <template #title-left>
+            <Icon icon="ContactsOutlined" />
+            任务列表
+          </template>
+          <template #title-right>
+            <a-button type="primary">
+              <Icon icon="PlusCircleOutlined" />
+              新建任务
+            </a-button>
+          </template>
+          <template #action>
+            <a-button type="link">
+              <Icon icon="EditOutlined" />
+            </a-button>
+            <a-button type="link">
+              <Icon icon="DeleteOutlined" />
+            </a-button>
+          </template>
+        </i-table>
+      </a-card>
+    </a-space>
   </div>
 </template>
 

@@ -73,6 +73,6 @@ export const useAppStore = defineStore(
     }
   },
   {
-    persist: true,
+    persist: false,
   },
 )

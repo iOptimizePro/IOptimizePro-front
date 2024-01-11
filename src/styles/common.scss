@@ -1,38 +1,10 @@
 @import 'theme.scss';
 
-/* tailwind.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-/* tailwind.css */
-
-// fade-transform
-.fade-transform-leave-active,
-.fade-transform-enter-active {
-  transition: all .5s;
-}
-
-.fade-transform-enter {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
-.fade-transform-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
 // 修改ant-design-vue 默认样式
 .ant-layout .ant-layout-sider-dark {
   background: #141414;
 }
 
-.ant-layout .ant-layout-header {
-  @include useTheme {
-    background-color: getModeVar('cardBgColor');
-    color: getModeVar('infoColor');
-  }
-}
 
 .ant-layout .ant-layout-sider-trigger {
   transition: all 0.2s, background-color 0s !important;
@@ -44,6 +16,7 @@
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
+  background: rgb(245, 245, 245);
 }
 
 ::-webkit-scrollbar-thumb {

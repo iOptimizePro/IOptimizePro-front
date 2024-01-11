@@ -2,11 +2,12 @@
 //模式切换
 $modes: (
         light: (
-                bgColor: #f4f4f4,
+                bgColor: #fafafa,
                 bg1color: #fff,
                 cardBgColor: #fff,
-                containerBgColor: #f4f4f4,
+                containerBgColor: #fafafa,
                 boxShadowColor: rgba(0, 0, 0, 0.1),
+                borderColor: #f0f0f0,
                 infoColor: #000,
                 textColor: #000,
         ),
@@ -16,6 +17,7 @@ $modes: (
                 cardBgColor: #141414,
                 containerBgColor: #050505,
                 boxShadowColor: rgba(255, 255, 255, 0.1),
+                borderColor: #303030,
                 infoColor: #f4f4f4,
                 textColor: #fff,
         )

@@ -86,77 +86,86 @@ const columns = ref([
 <template>
   <div class="dashboard">
     <div class="content">
-      <i-page-header :sub-title="$t('app.welcome')" class="dashboard-page-header" style="width: 100%" title="USERNAME">
-        <div class="header-wrapper">
-          <div class="avatar">
-            <div class="avatar-img">
-              <Icon icon="UserOutlined" />
+      <a-space direction="vertical" size="large" style="width: 100%">
+        <i-page-header
+          :sub-title="$t('app.welcome')"
+          class="dashboard-page-header"
+          style="width: 100%"
+          title="USERNAME"
+        >
+          <div class="header-wrapper">
+            <div class="avatar">
+              <div class="avatar-img">
+                <Icon icon="UserOutlined" />
+              </div>
+            </div>
+            <div class="title-wrapper">
+              <div class="title">早安, USERNAME, 开始您一天的工作吧！</div>
+              <div class="sub-title">今日晴，20℃ - 32℃！</div>
             </div>
           </div>
-          <div class="title-wrapper">
-            <div class="title">早安, USERNAME, 开始您一天的工作吧！</div>
-            <div class="sub-title">今日晴，20℃ - 32℃！</div>
-          </div>
+        </i-page-header>
+        <div class="card-panel">
+          <a-card class="card-item">
+            <div class="card-item-title">本月新增任务</div>
+            <div class="card-item-content">
+              <div class="card-item-statics">786K</div>
+              <div class="card-item-icon">
+                <Icon icon="UserOutlined" />
+              </div>
+            </div>
+          </a-card>
+          <a-card class="card-item">
+            <div class="card-item-title">本月累计任务</div>
+            <div class="card-item-content">
+              <div class="card-item-statics">76</div>
+              <div class="card-item-icon">
+                <Icon icon="UserOutlined" />
+              </div>
+            </div>
+          </a-card>
+          <a-card class="card-item">
+            <div class="card-item-title">数据仓数量</div>
+            <div class="card-item-content">
+              <div class="card-item-statics">$56K</div>
+              <div class="card-item-icon">
+                <Icon icon="UserOutlined" />
+              </div>
+            </div>
+          </a-card>
+          <a-card class="card-item">
+            <div class="card-item-title">最新通知</div>
+            <div class="card-item-content">
+              <div class="card-item-statics">99+</div>
+              <div class="card-item-icon">
+                <Icon icon="UserOutlined" />
+              </div>
+            </div>
+          </a-card>
         </div>
-      </i-page-header>
-      <div class="card-panel">
-        <a-card class="card-item" hoverable>
-          <div class="card-item-title">本月新增任务</div>
-          <div class="card-item-content">
-            <div class="card-item-statics">786K</div>
-            <div class="card-item-icon">
-              <Icon icon="UserOutlined" />
-            </div>
-          </div>
+        <a-card>
+          <i-table :columns="columns" :data-source="dataSource">
+            <template #title-left>
+              <Icon icon="ContactsOutlined" />
+              任务列表
+            </template>
+            <template #title-right>
+              <a-button type="primary">
+                <Icon icon="PlusCircleOutlined" />
+                新建任务
+              </a-button>
+            </template>
+            <template #action>
+              <a-button type="link">
+                <Icon icon="EditOutlined" />
+              </a-button>
+              <a-button type="link">
+                <Icon icon="DeleteOutlined" />
+              </a-button>
+            </template>
+          </i-table>
         </a-card>
-        <a-card class="card-item" hoverable>
-          <div class="card-item-title">本月累计任务</div>
-          <div class="card-item-content">
-            <div class="card-item-statics">76</div>
-            <div class="card-item-icon">
-              <Icon icon="UserOutlined" />
-            </div>
-          </div>
-        </a-card>
-        <a-card class="card-item" hoverable>
-          <div class="card-item-title">数据仓数量</div>
-          <div class="card-item-content">
-            <div class="card-item-statics">$56K</div>
-            <div class="card-item-icon">
-              <Icon icon="UserOutlined" />
-            </div>
-          </div>
-        </a-card>
-        <a-card class="card-item" hoverable>
-          <div class="card-item-title">最新通知</div>
-          <div class="card-item-content">
-            <div class="card-item-statics">99+</div>
-            <div class="card-item-icon">
-              <Icon icon="UserOutlined" />
-            </div>
-          </div>
-        </a-card>
-      </div>
-      <i-table :columns="columns" :data-source="dataSource">
-        <template #title-left>
-          <Icon icon="ContactsOutlined" />
-          任务列表
-        </template>
-        <template #title-right>
-          <a-button type="primary">
-            <Icon icon="PlusCircleOutlined" />
-            新建任务
-          </a-button>
-        </template>
-        <template #action>
-          <a-button type="link">
-            <Icon icon="EditOutlined" />
-          </a-button>
-          <a-button type="link">
-            <Icon icon="DeleteOutlined" />
-          </a-button>
-        </template>
-      </i-table>
+      </a-space>
     </div>
   </div>
 </template>
@@ -165,157 +174,148 @@ const columns = ref([
 @import '@/styles/theme.scss';
 
 .dashboard {
-  .content {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    //max-width: 1200px;
-    @media screen and (max-width: 768px) {
-      padding: 0;
+  .dashboard-page-header {
+    width: 100%;
+    @include useTheme {
+      background: getModeVar('cardBgColor');
     }
 
-    .dashboard-page-header {
+    .header-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
       width: 100%;
-      @include useTheme {
-        background: getModeVar('cardBgColor');
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
 
-      .header-wrapper {
+      .avatar {
         display: flex;
+        justify-content: center;
         align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-        height: 100%;
-        padding: 20px;
-        box-sizing: border-box;
+        width: 70px;
+        height: 70px;
+        border-radius: 999px;
+        background: #ffffff;
+        margin-right: 20px;
 
         @media screen and (max-width: 768px) {
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          margin-right: 0;
+          margin-bottom: 20px;
         }
 
-        .avatar {
+        .avatar-img {
           display: flex;
           justify-content: center;
           align-items: center;
           width: 70px;
           height: 70px;
           border-radius: 999px;
-          background: #ffffff;
-          margin-right: 20px;
-
-          @media screen and (max-width: 768px) {
-            margin-right: 0;
-            margin-bottom: 20px;
-          }
-
-          .avatar-img {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 70px;
-            height: 70px;
-            border-radius: 999px;
-            background: #1677ff;
-            font-size: 30px;
-            color: #ffffff;
-          }
-        }
-
-        .title-wrapper {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-          width: 100%;
-          height: 100%;
-
-          .title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-          }
-
-          .sub-title {
-            font-size: 14px;
-            font-weight: 400;
-            color: #999999;
-          }
+          background: #1677ff;
+          font-size: 30px;
+          color: #ffffff;
         }
       }
-    }
 
-    .card-panel {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-      margin-top: 10px;
+      .title-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        height: 100%;
 
-      @media screen and (max-width: 1600px) {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      @media screen and (max-width: 768px) {
-        grid-template-columns: 1fr;
-      }
-
-      .card-item {
-        //min-width: 270px;
-        border-radius: 10px;
-        margin: 10px;
-        color: #ffffff;
-        $colors: (
-          1: rgb(250, 125, 121),
-          2: rgb(84, 172, 208),
-          3: rgb(175, 80, 208),
-          4: rgb(255, 204, 102),
-        );
-        @each $key, $value in $colors {
-          &:nth-child(#{$key}) {
-            background: $value;
-          }
-        }
-
-        .card-item-title {
+        .title {
           font-size: 20px;
           font-weight: 600;
           margin-bottom: 10px;
         }
 
-        .card-item-content {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 10px;
+        .sub-title {
+          font-size: 14px;
+          font-weight: 400;
+          color: #999999;
+        }
+      }
+    }
+  }
+
+  .card-panel {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-gap: 24px;
+
+    @media screen and (max-width: 1600px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .card-item {
+      $colors: (
+        1: rgb(250, 125, 121),
+        2: rgb(84, 172, 208),
+        3: rgb(175, 80, 208),
+        4: rgb(255, 204, 102),
+      );
+      @each $key, $value in $colors {
+        &:nth-child(#{$key}) {
+          color: $value;
 
           .card-item-statics {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 60px;
-            width: 150px;
-            padding: 10px;
-            font-size: 24px;
-            font-weight: 600;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            background: linear-gradient(90deg, rgba($value, 0.2) 0%, rgba($value, 0.1) 10%, rgba($value, 0.01) 100%);
           }
 
           .card-item-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 30px;
-            width: 70px;
-            height: 70px;
-            border-radius: 999px;
-            font-size: 30px;
-            font-weight: 600;
-            border: 1px #ffffff solid;
+            border-color: $value !important;
           }
+        }
+      }
+
+      .card-item-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .card-item-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+
+        .card-item-statics {
+          display: flex;
+          flex: 1;
+          justify-content: space-between;
+          align-items: center;
+          height: 60px;
+          width: 150px;
+          padding: 10px;
+          font-size: 24px;
+          font-weight: 600;
+        }
+
+        .card-item-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 30px;
+          width: 70px;
+          height: 70px;
+          border-radius: 999px;
+          font-size: 30px;
+          font-weight: 600;
+          border: 1px #ffffff solid;
         }
       }
     }
