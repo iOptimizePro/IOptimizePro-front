@@ -1,34 +1,23 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
 import IMenu from '@/layouts/components/IMenu/IMenu.vue'
 import { getAssetsFile } from '@/utils/utils'
 import { useAppStore } from '@/stores'
+import { useVModel } from '@vueuse/core'
 
 const appStore = useAppStore()
-const emit = defineEmits(['update:selectedKeys', 'update:collapsed'])
+const emit = defineEmits(['update:collapsed'])
 const props = defineProps<{
-  selectedKeys: string[]
   collapsed?: boolean
-  collapsible: boolean
   menuList: any[]
-  sideWidth: number
 }>()
-const propsSelectedKeys = computed({
-  get: () => props.selectedKeys,
-  set: (val) => emit('update:selectedKeys', val),
-})
-const propsCollapsed = computed({
-  get: () => props.collapsed,
-  set: (val) => emit('update:collapsed', val),
-})
+const propsCollapsed = useVModel(props, 'collapsed', emit)
 </script>
 
 <template>
   <a-layout-sider
+    v-bind="$attrs"
     v-model:collapsed="propsCollapsed"
-    :collapsible="collapsible"
     :theme="appStore.darkMode || 'light'"
-    :width="sideWidth"
     class="i-side"
   >
     <div class="logo">
@@ -48,7 +37,7 @@ const propsCollapsed = computed({
         />
       </a>
     </div>
-    <i-menu v-model:selected-keys="propsSelectedKeys" :menu-list="menuList" />
+    <i-menu v-bind="$attrs" :menu-list="menuList" />
   </a-layout-sider>
 </template>
 
@@ -60,9 +49,11 @@ const propsCollapsed = computed({
   height: 100vh;
   box-sizing: border-box;
   @include useTheme {
+    background: getModeVar('cardBgColor');
     box-shadow: 2px 0 6px getModeVar('boxShadowColor');
   }
   z-index: 99;
+  //transition: width 0.3s;
 
   .logo {
     display: flex;

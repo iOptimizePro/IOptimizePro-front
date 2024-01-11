@@ -1,26 +1,11 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useAppStore } from '@/stores'
-
-const appStore = useAppStore()
-const emit = defineEmits(['update:selectedKeys'])
-const props = defineProps<{
-  selectedKeys: string[]
+defineProps<{
   menuList: any[]
 }>()
-const propsSelectedKeys = computed({
-  get: () => props.selectedKeys,
-  set: (val) => emit('update:selectedKeys', val),
-})
 </script>
 
 <template>
-  <a-menu
-    v-model:selectedKeys="propsSelectedKeys"
-    :inline-indent="15"
-    mode="inline"
-    style="background: transparent; border-inline-end: none"
-  >
+  <a-menu class="i-menu" v-bind="$attrs" :inline-indent="15" mode="inline">
     <!-- 或者使用 mode="inline" -->
     <template v-for="item in menuList" :key="item.path">
       <a-sub-menu v-if="'children' in item" :key="item.path">
@@ -59,4 +44,43 @@ const propsSelectedKeys = computed({
   </a-menu>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import '@/styles/theme.scss';
+
+.i-menu {
+  background: transparent !important;
+  border-inline-end: none !important;
+
+  :deep(.ant-menu-title-content) {
+    box-sizing: border-box;
+    height: 46px;
+    margin: 10px 7px 0 7px;
+    width: calc(100% - 14px);
+    @include useTheme {
+      //background: getModeVar('bgColor');
+      //border-bottom: 2px solid getModeVar('borderColor');
+    }
+  }
+
+  :deep(.ant-menu-item),
+  :deep(.ant-menu-submenu-title) {
+    box-sizing: border-box;
+    height: 46px;
+    margin: 0;
+    width: 100%;
+  }
+
+  //:deep(.ant-menu),
+  //:deep(.ant-menu-sub),
+  //:deep(.ant-menu-inline) {
+  //  //background: transparent !important;
+  //}
+
+  :deep(.ant-menu-item-selected) {
+    @include useTheme {
+      border: 2px solid getModeVar('primary');
+      color: getColor('primary');
+    }
+  }
+}
+</style>

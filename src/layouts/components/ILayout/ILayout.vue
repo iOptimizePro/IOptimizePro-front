@@ -13,7 +13,9 @@ const menuConfig = reactive({
   menuListArr: convertToRouterArray(asyncRouterMap.value), // 菜单列表数组
   collapsed: false, // 侧边栏收起
   selectedKeys: [] as string[], // 侧边栏选中的key
+  openKeys: [] as string[], // 侧边栏展开的key
   openDrawer: false, // 移动端侧边栏
+  hideSide: false, // 隐藏侧边栏
   sideWidth: 240, // 侧边栏宽度
 })
 const tabList = ref<IRouter[]>([])
@@ -48,13 +50,6 @@ function init() {
     menuConfig.selectedKeys = [item.path]
   }
 }
-
-onMounted(() => {
-  init()
-  if (window.innerWidth < 1200) {
-    menuConfig.collapsed = true
-  }
-})
 
 /**
  * 处理tab切换
@@ -93,6 +88,29 @@ function handleTabEdit(activeKey: string, action: 'add' | 'remove') {
 }
 
 /**
+ * 找到子元素的所有父元素
+ */
+function findParentPath(path: string, routers: IRouter[]): any {
+  for (const route of routers) {
+    if (route.path === path) {
+      return []
+    }
+
+    if (route.children) {
+      // 递归查找子元素的父元素
+      const parentRoutes = findParentPath(path, route.children)
+      if (parentRoutes) {
+        // 如果找到了父元素，将当前路由对象添加到父元素数组中并返回
+        return [...parentRoutes, route]
+      }
+    }
+  }
+
+  // 如果没有找到匹配的父元素，返回 undefined
+  return undefined
+}
+
+/**
  * 处理路由变化 向tabList中添加tab
  */
 watch(
@@ -112,6 +130,20 @@ watch(
 )
 
 /**
+ * 处理侧边栏展开
+ */
+watch(
+  () => menuConfig.selectedKeys,
+  (selectedKeys) => {
+    const item = menuConfig.menuListArr.find((item) => item.path === selectedKeys[0])
+    if (item) {
+      menuConfig.openKeys = findParentPath(item.path, menuConfig.menuListArr)?.map((item: any) => item.path) || []
+    }
+  },
+  { immediate: true },
+)
+
+/**
  * 处理页面布局
  */
 function handleWindowResize() {
@@ -121,19 +153,31 @@ function handleWindowResize() {
   const width = window.innerWidth
   // 页面宽度小于768px时，打开移动端侧边栏
   if (width < md) {
+    menuConfig.hideSide = true
     menuConfig.openDrawer = false
-    menuConfig.collapsed = true
+    menuConfig.collapsed = false
+    console.log(menuConfig.collapsed)
     // 页面宽度小于1200px时，侧边栏收起, 移动端侧边栏关闭
   } else if (width > md && width < lg) {
+    menuConfig.hideSide = false
     menuConfig.openDrawer = false
     menuConfig.collapsed = true
     // 页面宽度大于1200px时，侧边栏展开
   } else if (width > lg) {
+    menuConfig.hideSide = false
     menuConfig.collapsed = false
   }
 }
 
 window.addEventListener('resize', handleWindowResize)
+
+/**
+ * 页面加载完成后初始化
+ */
+onMounted(() => {
+  init()
+  handleWindowResize()
+})
 </script>
 
 <template>
@@ -142,10 +186,10 @@ window.addEventListener('resize', handleWindowResize)
       <i-side
         v-model:collapsed="menuConfig.collapsed"
         v-model:selected-keys="menuConfig.selectedKeys"
+        v-model:open-keys="menuConfig.openKeys"
         :collapsible="true"
         :menu-list="menuConfig.menuList"
-        :side-width="menuConfig.sideWidth"
-        class="inner-side"
+        :width="menuConfig.hideSide ? 0 : menuConfig.sideWidth"
       />
       <a-layout class="inner-layout">
         <i-header v-model:menu-collapsed="menuConfig.collapsed" v-model:open-drawer="menuConfig.openDrawer" />
@@ -200,9 +244,10 @@ window.addEventListener('resize', handleWindowResize)
     >
       <i-side
         v-model:selected-keys="menuConfig.selectedKeys"
+        v-model:open-keys="menuConfig.openKeys"
         :collapsible="false"
         :menu-list="menuConfig.menuList"
-        :side-width="menuConfig.sideWidth"
+        :width="menuConfig.sideWidth"
       />
     </a-drawer>
   </div>
@@ -224,12 +269,6 @@ window.addEventListener('resize', handleWindowResize)
       @include useTheme {
         background-color: getModeVar('cardBgColor');
         color: getModeVar('infoColor');
-      }
-    }
-
-    .inner-side {
-      @media screen and (max-width: 768px) {
-        display: none;
       }
     }
 
