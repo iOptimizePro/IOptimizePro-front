@@ -6,6 +6,7 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import eslintPlugin from 'vite-plugin-eslint'
 import viteCompression from 'vite-plugin-compression'
+import vsharp from 'vite-plugin-vsharp'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -14,12 +15,21 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       vue(),
       eslintPlugin(),
+      // 图片压缩
+      vsharp(),
+      // 代码gzip压缩
       viteCompression({
-        verbose: true,
-        disable: false,
-        threshold: 10240,
-        algorithm: 'gzip',
-        ext: '.gz',
+        verbose: true, // 控制台输出压缩结果
+        disable: false, // 禁用
+        threshold: 10240, // 文件大小大于这个值时启用压缩
+        algorithm: 'gzip', // 压缩算法
+        ext: '.gz', // 压缩后缀
+        // deleteOriginFile: false, // 是否删除原文件
+        deleteOriginFile: true, // 是否删除原文件
+        compressionOptions: {
+          // 压缩级别
+          level: 9,
+        },
       }),
       Components({
         resolvers: [

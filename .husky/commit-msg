@@ -3,3 +3,4 @@
 
 npm run commitlint
 npm run format
+npm run type-check
