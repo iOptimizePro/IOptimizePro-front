@@ -5,12 +5,12 @@
   background: #141414;
 }
 
-
 .ant-layout .ant-layout-sider-trigger {
-  transition: all 0.2s, background-color 0s !important;
+  transition:
+    all 0.2s,
+    background-color 0s !important;
   background: if(getMode() == 'dark', #141414, #ffffff);
 }
-
 
 // 滚动条样式
 ::-webkit-scrollbar {
