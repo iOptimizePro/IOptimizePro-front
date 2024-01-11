@@ -138,7 +138,7 @@ window.addEventListener('resize', handleWindowResize)
 
 <template>
   <div class="basic-layout">
-    <a-layout class="layout">
+    <a-layout>
       <i-side
         v-model:collapsed="menuConfig.collapsed"
         v-model:selected-keys="menuConfig.selectedKeys"
@@ -214,6 +214,8 @@ window.addEventListener('resize', handleWindowResize)
 .basic-layout {
   .ant-layout {
     --footer-padding: 10px;
+
+    min-height: 100vh;
     @include useTheme {
       background-color: getModeVar('bgColor');
     }
@@ -224,50 +226,6 @@ window.addEventListener('resize', handleWindowResize)
         color: getModeVar('infoColor');
       }
     }
-
-    .ant-layout-content {
-      margin: 20px 16px;
-      overflow: auto;
-      max-height: calc(100vh - 70px - var(--footer-padding) * 2 - 20px - 30px);
-    }
-
-    .ant-layout-footer {
-      text-align: center;
-      //padding: var(--footer-padding) 5px;
-      padding: calc(var(--footer-padding) + 5px) 10px;
-      //position: fixed;
-      //width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      @include useTheme {
-        background-color: getModeVar('bg1color');
-        color: getModeVar('infoColor');
-        border-top: 1px solid getModeVar('borderColor');
-      }
-
-      @media screen and (max-width: 768px) {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .title {
-        @media screen and (max-width: 768px) {
-          font-size: 12px;
-        }
-      }
-
-      .version {
-        @media screen and (max-width: 768px) {
-          font-size: 10px;
-        }
-      }
-    }
-  }
-
-  .layout {
-    min-height: 100vh;
 
     .inner-side {
       @media screen and (max-width: 768px) {
@@ -283,8 +241,44 @@ window.addEventListener('resize', handleWindowResize)
       .a-layout-content {
         margin: 0;
         padding: 10px;
+        overflow: auto;
+        max-height: calc(100vh - 70px - var(--footer-padding) * 2 - 20px - 30px);
         @include useTheme {
           background: getModeVar('containerBgColor');
+        }
+      }
+
+      .ant-layout-footer {
+        text-align: center;
+        //padding: var(--footer-padding) 5px;
+        padding: calc(var(--footer-padding) + 5px) 10px;
+        //position: fixed;
+        //width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include useTheme {
+          background-color: getModeVar('bg1color');
+          color: getModeVar('infoColor');
+          border-top: 1px solid getModeVar('borderColor');
+        }
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .title {
+          @media screen and (max-width: 768px) {
+            font-size: 12px;
+          }
+        }
+
+        .version {
+          @media screen and (max-width: 768px) {
+            font-size: 10px;
+          }
         }
       }
     }

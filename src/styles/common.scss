@@ -1,17 +1,5 @@
 @import 'theme.scss';
 
-// 修改ant-design-vue 默认样式
-.ant-layout .ant-layout-sider-dark {
-  background: #141414;
-}
-
-.ant-layout .ant-layout-sider-trigger {
-  transition:
-    all 0.2s,
-    background-color 0s !important;
-  background: if(getMode() == 'dark', #141414, #ffffff);
-}
-
 // 滚动条样式
 ::-webkit-scrollbar {
   width: 4px;
