@@ -43,8 +43,8 @@ export default defineConfig(({ command, mode }) => {
     ],
     css: {
       postcss: {
-        plugins:[postcssPresetEnv()]
-      }
+        plugins: [postcssPresetEnv()],
+      },
     },
     resolve: {
       alias: {

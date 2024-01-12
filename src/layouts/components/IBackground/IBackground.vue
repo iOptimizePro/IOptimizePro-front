@@ -2,8 +2,8 @@
 
 <template>
   <div class="i-background">
-    <img class="bg-main" src="@/assets/images/bg2.svg" />
-    <img class="bg-bg" src="@/assets/images/bg2-bg.svg" />
+    <img class="i-background__main" src="@/assets/images/bg2.svg" />
+    <img class="i-background__bg" src="@/assets/images/bg2-bg.svg" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@
   z-index: -1;
   overflow: hidden;
 
-  .bg-main {
+  .i-background__main {
     position: absolute;
     left: 10%;
     bottom: 0;
@@ -34,7 +34,7 @@
     z-index: 1;
   }
 
-  .bg-bg {
+  .i-background__bg {
     position: absolute;
     right: 0;
     height: 100%;

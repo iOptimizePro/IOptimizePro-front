@@ -172,7 +172,6 @@ function handleWindowResize() {
     menuConfig.hideSide = true
     menuConfig.openDrawer = false
     menuConfig.collapsed = false
-    console.log(menuConfig.collapsed)
     // 页面宽度小于1200px时，侧边栏收起, 移动端侧边栏关闭
   } else if (width > md && width < lg) {
     changeTabConfig(false)
@@ -217,7 +216,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="basic-layout">
+  <div class="i-layout">
     <a-layout>
       <i-side
         v-model:collapsed="menuConfig.collapsed"
@@ -227,7 +226,7 @@ onMounted(() => {
         :menu-list="menuConfig.menuList"
         :width="menuConfig.hideSide ? 0 : menuConfig.sideWidth"
       />
-      <a-layout class="inner-layout">
+      <a-layout class="i-layout__inner">
         <i-header v-model:menu-collapsed="menuConfig.collapsed" v-model:open-drawer="menuConfig.openDrawer" />
         <!--使用a-config-provider修改单个组件的样式 TODO-->
         <a-config-provider :theme="tabConfig">
@@ -244,7 +243,7 @@ onMounted(() => {
             </template>
           </a-tabs>
         </a-config-provider>
-        <a-layout-content class="a-layout-content">
+        <a-layout-content>
           <slot></slot>
         </a-layout-content>
         <a-layout-footer>
@@ -276,7 +275,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
 
-.basic-layout {
+.i-layout {
   .ant-layout {
     --footer-padding: 10px;
 
@@ -292,12 +291,12 @@ onMounted(() => {
       }
     }
 
-    .inner-layout {
+    .i-layout__inner {
       @media screen and (max-width: 768px) {
         margin-left: 0;
       }
 
-      .a-layout-content {
+      .ant-layout-content {
         margin: 0;
         padding: 10px;
         overflow: auto;
@@ -340,13 +339,6 @@ onMounted(() => {
           }
         }
       }
-    }
-  }
-
-  .mobile-drawer {
-    display: none;
-    @media screen and (max-width: 768px) {
-      display: block;
     }
   }
 }
