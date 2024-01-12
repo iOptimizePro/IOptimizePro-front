@@ -9,19 +9,19 @@ function logout() {
 </script>
 
 <template>
-  <div class="avatar">
+  <div class="i-avatar">
     <a-dropdown :trigger="['click']">
-      <div class="avatar-wrapper">
-        <div class="avatar-wrapper-icon">
+      <div class="i-avatar__wrapper">
+        <div class="i-avatar__wrapper--icon">
           <a-avatar :size="40">
             <template #icon>
-              <UserOutlined />
+              <Icon icon="UserOutlined" />
             </template>
           </a-avatar>
         </div>
-        <div class="avatar-title">
-          <span class="avatar-title-hello">hello, </span>
-          <span class="avatar-title-username">username</span>
+        <div class="i-avatar__title">
+          <span class="i-avatar__title--hello">hello, </span>
+          <span class="i-avatar__title--username">username</span>
         </div>
       </div>
       <template #overlay>
@@ -49,14 +49,14 @@ function logout() {
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
 
-.avatar {
-  .avatar-wrapper {
+.i-avatar {
+  .i-avatar__wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 
-    .avatar-wrapper-icon {
+    .i-avatar__wrapper--icon {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -68,7 +68,7 @@ function logout() {
       z-index: 2;
     }
 
-    .avatar-title {
+    .i-avatar__title {
       display: flex;
       align-items: center;
       background: rgba(#1677ff, 0.4);
@@ -95,7 +95,7 @@ function logout() {
         display: none;
       }
 
-      .avatar-title-username {
+      .i-avatar__title--username {
         font-weight: 600;
         // 单行省略号
         max-width: 70px;

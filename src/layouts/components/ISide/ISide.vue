@@ -20,7 +20,7 @@ const propsCollapsed = useVModel(props, 'collapsed', emit)
     :theme="appStore.darkMode || 'light'"
     class="i-side"
   >
-    <div class="logo">
+    <div class="i-side__logo">
       <a href="/">
         <img
           :src="
@@ -55,7 +55,7 @@ const propsCollapsed = useVModel(props, 'collapsed', emit)
   z-index: 99;
   //transition: width 0.3s;
 
-  .logo {
+  .i-side__logo {
     display: flex;
     justify-content: center;
     align-items: center;

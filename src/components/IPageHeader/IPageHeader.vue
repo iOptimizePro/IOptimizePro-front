@@ -12,8 +12,8 @@ defineProps({
 </script>
 
 <template>
-  <div class="page-header-wrapper">
-    <a-page-header :sub-title="subTitle" :title="title" class="page-header" />
+  <div class="i-page-header">
+    <a-page-header v-bind="$attrs" :sub-title="subTitle" :title="title" class="i-page-header__inner" />
     <slot></slot>
   </div>
 </template>
@@ -21,7 +21,7 @@ defineProps({
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
 
-.page-header-wrapper {
+.i-page-header {
   @include useTheme {
     background: getModeVar('cardBgColor');
     border: 1px solid getModeVar('borderColor');

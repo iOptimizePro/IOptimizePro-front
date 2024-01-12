@@ -45,6 +45,7 @@ declare module 'vue' {
     ATabs: typeof import('ant-design-vue/es')['Tabs']
     AUpload: typeof import('ant-design-vue/es')['Upload']
     AUploadDragger: typeof import('ant-design-vue/es')['UploadDragger']
+    ICard: typeof import('./src/components/ICard/ICard.vue')['default']
     Icon: typeof import('./src/components/Icon/Icon.vue')['default']
     IPageHeader: typeof import('./src/components/IPageHeader/IPageHeader.vue')['default']
     ITable: typeof import('./src/components/ITable/ITable.vue')['default']

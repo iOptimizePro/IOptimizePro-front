@@ -7,6 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 import eslintPlugin from 'vite-plugin-eslint'
 import viteCompression from 'vite-plugin-compression'
 import vsharp from 'vite-plugin-vsharp'
+import postcssPresetEnv from 'postcss-preset-env'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -20,15 +21,15 @@ export default defineConfig(({ command, mode }) => {
       // 代码gzip压缩
       viteCompression({
         verbose: true, // 控制台输出压缩结果
-        disable: false, // 禁用
+        disable: true, // 禁用
         threshold: 10240, // 文件大小大于这个值时启用压缩
         algorithm: 'gzip', // 压缩算法
         ext: '.gz', // 压缩后缀
-        // deleteOriginFile: false, // 是否删除原文件
-        deleteOriginFile: true, // 是否删除原文件
+        deleteOriginFile: false, // 是否删除原文件
+        // deleteOriginFile: true, // 是否删除原文件
         compressionOptions: {
           // 压缩级别
-          level: 9,
+          level: 5,
         },
       }),
       Components({
@@ -40,6 +41,11 @@ export default defineConfig(({ command, mode }) => {
         ],
       }),
     ],
+    css: {
+      postcss: {
+        plugins: [postcssPresetEnv()],
+      },
+    },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)), // 为 @ 设置别名

@@ -1,26 +1,14 @@
-<script lang="ts" setup>
-defineProps<{
-  columns: any[]
-  dataSource: any[]
-  rowSelection?: any
-}>()
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div class="table-panel">
-    <a-table
-      :columns="columns"
-      :data-source="dataSource"
-      :row-selection="rowSelection"
-      :scroll="{ x: 1200 }"
-      class="table-container"
-    >
+  <div class="i-table">
+    <a-table v-bind="$attrs" :scroll="{ x: 1200 }" class="i-table__container">
       <template #title>
-        <div class="table-title">
-          <div class="table-title-left">
+        <div class="i-table__title">
+          <div class="i-table__title--left">
             <slot name="title-left"></slot>
           </div>
-          <div class="table-title-right">
+          <div class="i-table__title--right">
             <slot name="title-right"></slot>
           </div>
         </div>
@@ -35,11 +23,11 @@ defineProps<{
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
 
-.table-panel {
+.i-table {
   width: calc(100% - 20px);
   margin: 10px;
 
-  .table-container {
+  .i-table__container {
     width: 100%;
 
     :deep(.ant-table-title) {
@@ -58,7 +46,7 @@ defineProps<{
       font-size: 18px;
     }
 
-    .table-title {
+    .i-table__title {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -66,12 +54,12 @@ defineProps<{
       border-bottom: 2px #1677ff solid;
       color: #1677ff;
 
-      .table-title-left {
+      .i-table__title--left {
         font-size: 20px;
         font-weight: 600;
       }
 
-      .table-title-right {
+      .i-table__title--right {
         display: flex;
         align-items: center;
         justify-content: center;

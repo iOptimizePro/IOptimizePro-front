@@ -1,4 +1,11 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import useEnterAnimation from '@/hooks/useEnterAnimation'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  useEnterAnimation('.ant-space-item', { type: 'y' })
+})
+</script>
 
 <template>
   <div class="data-access">

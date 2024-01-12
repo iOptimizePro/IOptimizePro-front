@@ -38,20 +38,19 @@ watch(
 </script>
 
 <template>
-  <div id="auth-layout">
+  <div class="i-auth-layout">
     <a-config-provider
       :theme="{
         algorithm: theme.defaultAlgorithm,
       }"
     >
-      <div class="auth-header">
-        <div class="header-left">
+      <div class="i-auth-layout__header">
+        <div class="i-auth-layout__header--left">
           <a href="/">
-            <!--移动端不显示 TODO -->
             <img src="@/assets/images/logo1-blue.png" />
           </a>
         </div>
-        <div class="header-right">
+        <div class="i-auth-layout__header--right">
           <div class="lang">
             <a-dropdown :trigger="['click']">
               <a-button type="link">
@@ -90,14 +89,19 @@ watch(
         </div>
       </div>
       <i-background ref="iBackgroundRef" />
-      <div class="container">
-        <div class="auth-top">
-          <a-tabs v-model:active-key="activeKey" :tab-bar-gutter="150" class="auth-tabs" @change="handleTabsChange">
+      <div class="i-auth-layout__container">
+        <div class="i-auth-layout__container--top">
+          <a-tabs
+            v-model:active-key="activeKey"
+            :tab-bar-gutter="150"
+            class="i-auth-layout__container--tabs"
+            @change="handleTabsChange"
+          >
             <a-tab-pane key="login" :tab="$t('user.login.title')" />
             <a-tab-pane key="register" :tab="$t('user.register.title')" />
           </a-tabs>
         </div>
-        <router-view v-slot="{ Component }" class="auth-form">
+        <router-view v-slot="{ Component }" class="i-auth-layout__container--form">
           <transition-slide :offset="[-16, 0]" mode="out-in">
             <component :is="Component" />
           </transition-slide>
@@ -110,13 +114,13 @@ watch(
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
 
-#auth-layout {
+.i-auth-layout {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 100vh;
 
-  .auth-header {
+  .i-auth-layout__header {
     position: absolute;
     display: flex;
     align-items: center;
@@ -139,7 +143,7 @@ watch(
       padding: 0 20px;
     }
 
-    .header-left {
+    .i-auth-layout__header--left {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -153,7 +157,7 @@ watch(
       }
     }
 
-    .header-right {
+    .i-auth-layout__header--right {
       display: flex;
       align-items: center;
 
@@ -169,7 +173,7 @@ watch(
     }
   }
 
-  .container {
+  .i-auth-layout__container {
     position: relative;
     width: 470px;
     margin: 0 auto;
@@ -196,7 +200,7 @@ watch(
       border-radius: 0;
     }
 
-    .auth-form {
+    .i-auth-layout__container--form {
       padding: 20px 20px 30px 20px;
 
       @media screen and (max-width: 768px) {
