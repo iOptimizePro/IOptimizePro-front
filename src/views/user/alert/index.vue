@@ -72,6 +72,12 @@ const rowSelection = reactive({
     // console.log(selected, selectedRows, changeRows)
   },
 })
+import useEnterAnimation from '@/hooks/useEnterAnimation'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  useEnterAnimation('.ant-space-item', { type: 'y' })
+})
 </script>
 
 <template>

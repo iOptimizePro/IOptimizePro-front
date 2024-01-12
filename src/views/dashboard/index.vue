@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import ITable from '@/components/ITable/ITable.vue'
 import IPageHeader from '@/components/IPageHeader/IPageHeader.vue'
+import useEnterAnimation from '@/hooks/useEnterAnimation'
 
 const dataSource = ref([
   {
@@ -81,6 +82,9 @@ const columns = ref([
     slots: { customRender: 'action' },
   },
 ])
+onMounted(() => {
+  useEnterAnimation('.ant-space-item', { type: 'y' })
+})
 </script>
 
 <template>
@@ -106,7 +110,7 @@ const columns = ref([
           </div>
         </i-page-header>
         <div class="card-panel">
-          <a-card class="card-item">
+          <i-card class="card-item">
             <div class="card-item-title">本月新增任务</div>
             <div class="card-item-content">
               <div class="card-item-statics">786K</div>
@@ -114,8 +118,8 @@ const columns = ref([
                 <Icon icon="UserOutlined" />
               </div>
             </div>
-          </a-card>
-          <a-card class="card-item">
+          </i-card>
+          <i-card class="card-item">
             <div class="card-item-title">本月累计任务</div>
             <div class="card-item-content">
               <div class="card-item-statics">76</div>
@@ -123,8 +127,8 @@ const columns = ref([
                 <Icon icon="UserOutlined" />
               </div>
             </div>
-          </a-card>
-          <a-card class="card-item">
+          </i-card>
+          <i-card class="card-item">
             <div class="card-item-title">数据仓数量</div>
             <div class="card-item-content">
               <div class="card-item-statics">$56K</div>
@@ -132,8 +136,8 @@ const columns = ref([
                 <Icon icon="UserOutlined" />
               </div>
             </div>
-          </a-card>
-          <a-card class="card-item">
+          </i-card>
+          <i-card class="card-item">
             <div class="card-item-title">最新通知</div>
             <div class="card-item-content">
               <div class="card-item-statics">99+</div>
@@ -141,9 +145,9 @@ const columns = ref([
                 <Icon icon="UserOutlined" />
               </div>
             </div>
-          </a-card>
+          </i-card>
         </div>
-        <a-card>
+        <i-card>
           <i-table :columns="columns" :data-source="dataSource">
             <template #title-left>
               <Icon icon="ContactsOutlined" />
@@ -164,7 +168,7 @@ const columns = ref([
               </a-button>
             </template>
           </i-table>
-        </a-card>
+        </i-card>
       </a-space>
     </div>
   </div>

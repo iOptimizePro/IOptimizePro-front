@@ -50,6 +50,12 @@ const columns = ref([
     slots: { customRender: 'action' },
   },
 ])
+import useEnterAnimation from '@/hooks/useEnterAnimation'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  useEnterAnimation('.ant-space-item', { type: 'y' })
+})
 </script>
 
 <template>
