@@ -50,7 +50,7 @@ const propsCollapsed = useVModel(props, 'collapsed', emit)
   box-sizing: border-box;
   @include useTheme {
     background: getModeVar('cardBgColor');
-    box-shadow: 2px 0 6px getModeVar('boxShadowColor');
+    //box-shadow: 2px 0 6px getModeVar('boxShadowColor');
   }
   z-index: 99;
   //transition: width 0.3s;

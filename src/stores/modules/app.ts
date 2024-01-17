@@ -24,14 +24,41 @@ export const useAppStore = defineStore(
       return locale.value
     })
     // 颜色模式
-    const darkModeRef = ref<'dark' | 'light'>('light')
+    const darkModeRef = ref<'auto' | 'dark' | 'light'>('auto')
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)') as MediaQueryList
+
+    function handleDarkModeChange(event?: MediaQueryListEvent) {
+      if (event === undefined) {
+        darkModeRef.value = darkModeQuery.matches ? 'dark' : 'light'
+        return
+      }
+      darkModeRef.value = event?.matches ? 'dark' : 'light'
+      document.documentElement.setAttribute('data-dark', darkModeRef.value)
+    }
+
     const darkMode = computed({
       get() {
+        if (darkModeRef.value === 'auto') {
+          document.documentElement.setAttribute('data-darkMode', 'auto')
+          handleDarkModeChange()
+          darkModeQuery.addEventListener('change', handleDarkModeChange)
+        }
         return darkModeRef.value
       },
       set(val) {
         darkModeRef.value = val
-        document.documentElement.setAttribute('data-dark', darkModeRef.value)
+        if (darkModeRef.value === 'auto') {
+          document.documentElement.setAttribute('data-darkMode', 'auto')
+        } else {
+          document.documentElement.removeAttribute('data-darkMode')
+          document.documentElement.setAttribute('data-dark', darkModeRef.value)
+        }
+        if (document.documentElement.getAttribute('data-darkMode') === 'auto') {
+          handleDarkModeChange()
+          darkModeQuery.addEventListener('change', handleDarkModeChange)
+        } else {
+          darkModeQuery.removeEventListener('change', handleDarkModeChange)
+        }
       },
     })
     // 主题配置

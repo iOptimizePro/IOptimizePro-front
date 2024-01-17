@@ -298,11 +298,18 @@ onMounted(() => {
 
       .ant-layout-content {
         margin: 0;
-        padding: 10px;
+        padding: 20px;
         overflow: auto;
         max-height: calc(100vh - 70px - var(--footer-padding) * 2 - 20px - 30px);
         @include useTheme {
           background: getModeVar('containerBgColor');
+        }
+
+        @media screen and (max-width: 1280px) {
+          padding: 15px;
+        }
+        @media screen and (max-width: 768px) {
+          padding: 10px;
         }
       }
 
