@@ -69,5 +69,9 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
+    esbuild: {
+      // 移除console和debugger
+      drop: ['console', 'debugger'],
+    },
   }
 })
