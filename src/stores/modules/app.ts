@@ -27,12 +27,8 @@ export const useAppStore = defineStore(
     const darkModeRef = ref<'auto' | 'dark' | 'light'>('auto')
     const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)') as MediaQueryList
 
-    function handleDarkModeChange(event?: MediaQueryListEvent) {
-      if (event === undefined) {
-        darkModeRef.value = darkModeQuery.matches ? 'dark' : 'light'
-        return
-      }
-      darkModeRef.value = event?.matches ? 'dark' : 'light'
+    function handleDarkModeChange() {
+      darkModeRef.value = darkModeQuery.matches ? 'dark' : 'light'
       document.documentElement.setAttribute('data-dark', darkModeRef.value)
     }
 
@@ -78,15 +74,6 @@ export const useAppStore = defineStore(
         algorithm: darkMode.value === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm,
       }
     })
-    const setThemeName = (value: primaryColorEnumType) => {
-      themeName.value = value
-    }
-    const setLocale = (value: 'zhCN' | 'enUS') => {
-      locale.value = value
-    }
-    const toggleDarkMode = () => {
-      darkMode.value = darkMode.value === 'light' ? 'dark' : 'light'
-    }
     return {
       themeName,
       locale,
@@ -94,9 +81,6 @@ export const useAppStore = defineStore(
       themeConfig,
       darkModeRef, // 用于持久化 可怜的computed无法持久化
       darkMode,
-      setThemeName,
-      setLocale,
-      toggleDarkMode,
     }
   },
   {
