@@ -35,6 +35,7 @@
     },
     "theme": {
       "title": "Skin",
+      "auto": "Auto",
       "dark": "Dark",
       "light": "Light",
       "origin": "Default",
