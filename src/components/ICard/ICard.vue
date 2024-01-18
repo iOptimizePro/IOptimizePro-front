@@ -3,11 +3,14 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   mounted() {
-    const entries = Object.entries(this.$refs.instance || {})
-    entries.forEach(([key, value]) => {
-      // @ts-ignore
-      this[key] = value
-    })
+    // TODO 组件Ref获取异常 待修复
+    // if (this.$refs.instance && Object.keys(this.$refs.instance).length > 0) {
+    //   const entries = Object.entries(this.$refs.instance || {})
+    //   entries.forEach(([key, value]) => {
+    //     // @ts-ignore
+    //     this[key] = value
+    //   })
+    // }
   },
   props: {
     padding: {
