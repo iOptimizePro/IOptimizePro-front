@@ -19,5 +19,4 @@ EXPOSE 80
 
 #  CMD 和 RUN 的区别
 #  CMD 是在容器启动后执行的命令，而 RUN 则是在镜像构建的时候执行的命令。
-CMD echo "项目运行在http://localhost:80上\n"
 CMD nginx -g 'daemon off;'
