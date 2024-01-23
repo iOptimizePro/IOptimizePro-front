@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <v-echart v-bind="$attrs" class="chart" :option="option" :theme="themeComputed" autoresize />
+    <v-echart v-bind="$attrs" class="chart" :option="optionComputed" :theme="themeComputed" autoresize />
   </div>
 </template>
 
@@ -66,11 +66,25 @@ const themeComputed = computed(() => {
   return props.theme || appStore.darkMode
 })
 // 将option中添加backgroundColor=transparent的属性
-const option = computed(() => {
-  return {
-    ...props.option,
-    backgroundColor: 'transparent',
+const optionComputed = computed(() => {
+  let o = {} as any
+  Object.assign(o, props.option)
+  if (!o.backgroundColor) {
+    o.backgroundColor = 'transparent'
   }
+  if (!o.tooltip) {
+    return o
+  } else {
+    o.tooltip = {
+      ...o.tooltip,
+      backgroundColor: appStore.darkMode === 'light' ? '#fff' : '#000',
+      borderColor: appStore.darkMode === 'light' ? '#fff' : '#000',
+      textStyle: {
+        color: appStore.darkMode === 'light' ? '#000' : '#fff',
+      },
+    }
+  }
+  return o
 })
 </script>
 
