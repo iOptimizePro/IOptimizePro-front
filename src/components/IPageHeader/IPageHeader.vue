@@ -22,6 +22,7 @@ defineProps({
 @import '@/styles/theme.scss';
 
 .i-page-header {
+  border-radius: var(--border-radius);
   @include useTheme {
     background: getModeVar('cardBgColor');
     border: 1px solid getModeVar('borderColor');

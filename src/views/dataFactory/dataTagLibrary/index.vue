@@ -91,10 +91,10 @@ onMounted(() => {
 <template>
   <div class="data-tag-library">
     <a-space direction="vertical" size="large" style="width: 100%">
-      <a-card title="数据标签库">
+      <i-card title="数据标签库">
         <p>轻量化打造标签库，助力企业高质量发展</p>
-      </a-card>
-      <a-card title="标签搜索(高级)">
+      </i-card>
+      <i-card title="标签搜索(高级)">
         <a-form>
           <a-row :gutter="24">
             <template v-for="i in 10" :key="i">
@@ -114,8 +114,8 @@ onMounted(() => {
             </a-col>
           </a-row>
         </a-form>
-      </a-card>
-      <a-card>
+      </i-card>
+      <i-card>
         <i-table :columns="columns" :data-source="dataSource">
           <template #title-left>
             <Icon icon="ContactsOutlined" />
@@ -136,7 +136,7 @@ onMounted(() => {
             </a-button>
           </template>
         </i-table>
-      </a-card>
+      </i-card>
     </a-space>
   </div>
 </template>

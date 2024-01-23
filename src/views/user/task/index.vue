@@ -61,10 +61,10 @@ onMounted(() => {
 <template>
   <div class="task-manage-panel">
     <a-space direction="vertical" size="large" style="width: 100%">
-      <a-card title="任务管理">
+      <i-card title="任务管理">
         <p>管理个人任务列表，一键式查看任务情况</p>
-      </a-card>
-      <a-card>
+      </i-card>
+      <i-card>
         <i-table :columns="columns" :data-source="dataSource">
           <template #title-left>
             <Icon icon="ContactsOutlined" />
@@ -85,7 +85,7 @@ onMounted(() => {
             </a-button>
           </template>
         </i-table>
-      </a-card>
+      </i-card>
     </a-space>
   </div>
 </template>

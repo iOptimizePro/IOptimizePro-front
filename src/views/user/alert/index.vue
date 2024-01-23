@@ -83,10 +83,10 @@ onMounted(() => {
 <template>
   <div class="alert-manage-panel">
     <a-space direction="vertical" size="large" style="width: 100%">
-      <a-card title="消息管理">
+      <i-card title="消息管理">
         <p>管理接收和查看系统通知</p>
-      </a-card>
-      <a-card>
+      </i-card>
+      <i-card>
         <i-table :columns="columns" :data-source="dataSource" :row-selection="rowSelection">
           <template #title-left>
             <a-form layout="inline">
@@ -117,7 +117,7 @@ onMounted(() => {
             <a-button type="link"> 删除</a-button>
           </template>
         </i-table>
-      </a-card>
+      </i-card>
     </a-space>
   </div>
 </template>

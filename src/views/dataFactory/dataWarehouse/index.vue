@@ -91,10 +91,10 @@ onMounted(() => {
 <template>
   <div class="data-warehouse">
     <a-space direction="vertical" size="large" style="width: 100%">
-      <a-card title="数据仓">
+      <i-card title="数据仓">
         <p>管理和处理数据仓</p>
-      </a-card>
-      <a-card>
+      </i-card>
+      <i-card>
         <i-table :columns="columns" :data-source="dataSource">
           <template #title-left>
             <Icon icon="ContactsOutlined" />
@@ -115,7 +115,7 @@ onMounted(() => {
             </a-button>
           </template>
         </i-table>
-      </a-card>
+      </i-card>
     </a-space>
   </div>
 </template>
