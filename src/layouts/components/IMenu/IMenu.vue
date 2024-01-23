@@ -70,16 +70,18 @@ defineProps<{
     width: 100%;
   }
 
-  //:deep(.ant-menu),
-  //:deep(.ant-menu-sub),
-  //:deep(.ant-menu-inline) {
-  //  //background: transparent !important;
-  //}
+  :deep(.ant-menu),
+  :deep(.ant-menu-sub),
+  :deep(.ant-menu-inline) {
+    background: transparent !important;
+  }
 
   :deep(.ant-menu-item-selected) {
     @include useTheme {
-      border: 2px solid getModeVar('primary');
-      color: getColor('primary');
+      //border: 2px solid getModeVar('primary');
+      background-color: getColor('primary') !important;
+      //color: getColor('primary');
+      color: #ffffff;
     }
   }
 }

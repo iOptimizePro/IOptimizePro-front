@@ -1,5 +1,9 @@
 @import 'theme.scss';
 
+:root {
+  --border-radius: 0px;
+}
+
 * {
   padding: 0;
   margin: 0;

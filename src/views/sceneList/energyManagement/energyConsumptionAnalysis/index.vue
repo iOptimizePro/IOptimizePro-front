@@ -179,7 +179,7 @@ const option5 = reactive({
   },
   xAxis: {
     type: 'category',
-    data: ['2023年1月', '2023年2月'],
+    data: ['2023年1月', '2023年2月', '2023年3月', '2023年4月', '2023年5月', '2023年6月'],
   },
   yAxis: {
     type: 'value',
@@ -191,7 +191,7 @@ const option5 = reactive({
     {
       name: '电力消耗',
       type: 'bar',
-      data: [1600, 1400],
+      data: [1600, 1400, 1100, 900, 2300, 1300],
       itemStyle: {
         color: function (params: any) {
           return params.value > threshold ? 'orangered' : 'lightskyblue'

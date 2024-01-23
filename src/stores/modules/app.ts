@@ -58,8 +58,10 @@ export const useAppStore = defineStore(
       },
     })
     // 主题配置
+    const borderRadius = ref(0)
     const themeConfig = computed(() => {
       document.documentElement.setAttribute('data-theme', themeName.value)
+      document.documentElement.style.setProperty('--border-radius', borderRadius.value + 'px')
       // @ts-ignore
       return {
         token: {
@@ -69,7 +71,7 @@ export const useAppStore = defineStore(
           colorError: '#cf4444',
           colorInfo: variables[themeName.value] || '#27ba9b',
           wireframe: true,
-          borderRadius: 0, // 直角风格
+          borderRadius: borderRadius, // 直角风格
         },
         algorithm: darkMode.value === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm,
       }
@@ -78,6 +80,7 @@ export const useAppStore = defineStore(
       themeName,
       locale,
       localeComp,
+      borderRadius,
       themeConfig,
       darkModeRef, // 用于持久化 可怜的computed无法持久化
       darkMode,

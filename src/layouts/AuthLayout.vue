@@ -183,7 +183,7 @@ watch(
     //@include useTheme {
     //  background: getModeVar('cardBgColor');
     //}
-    //border-radius: 10px; // 圆角
+    border-radius: var(--border-radius); // 圆角
     overflow: hidden;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
     //@include useTheme {

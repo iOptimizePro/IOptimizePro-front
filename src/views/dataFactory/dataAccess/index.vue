@@ -10,10 +10,10 @@ onMounted(() => {
 <template>
   <div class="data-access">
     <a-space direction="vertical" size="large" style="width: 100%">
-      <a-card title="数据接入">
+      <i-card title="数据接入">
         <p>接入各种数据源，实现数据导入和整合</p>
-      </a-card>
-      <a-card title="说明">
+      </i-card>
+      <i-card title="说明">
         <p>
           导入文件格式说明：<br />
           1.文件名中不应包含特殊字符或空格。<br />
@@ -28,8 +28,8 @@ onMounted(() => {
           <a-button>参考示例模板</a-button>
           <a-button>查看历史导入</a-button>
         </a-space>
-      </a-card>
-      <a-card title="上传文件">
+      </i-card>
+      <i-card title="上传文件">
         <a-space direction="vertical" style="width: 100%">
           <a-upload-dragger style="width: 50%; margin: 0 auto">
             <p class="ant-upload-drag-icon">
@@ -39,7 +39,7 @@ onMounted(() => {
           </a-upload-dragger>
           <a-button style="float: right" type="primary">下一步</a-button>
         </a-space>
-      </a-card>
+      </i-card>
     </a-space>
   </div>
 </template>
