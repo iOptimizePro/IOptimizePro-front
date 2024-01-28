@@ -339,6 +339,7 @@ function toggleFullScreen() {
       --card-width: 400px;
       --card-height: 300px;
     }
+
     @media screen and (max-width: 1024px) {
       --card-width: 300px;
       --card-height: 250px;
