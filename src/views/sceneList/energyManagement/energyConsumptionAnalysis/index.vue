@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import ICharts from '@/components/ICharts/ICharts.vue'
 import { reactive, ref } from 'vue'
-import { getAssetsFile } from '@/utils/utils'
 import { useAppStore } from '@/stores'
 import jiangxi from '@/assets/map/jiangxi.json'
 import * as echarts from 'echarts'
@@ -18,6 +17,10 @@ const option1 = reactive({
     axisPointer: {
       type: 'cross',
     },
+  },
+  legend: {
+    data: ['电力'],
+    x: 'left',
   },
   xAxis: {
     type: 'category',
@@ -132,6 +135,17 @@ const option4 = reactive({
     subtext: '能源利用率（百分比）',
     x: 'center',
   },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow',
+    },
+    formatter: '{b}: {c}%',
+  },
+  legend: {
+    data: ['能源利用率'],
+    x: 'left',
+  },
   xAxis: {
     type: 'category',
     data: data.map(function (item) {
@@ -146,6 +160,7 @@ const option4 = reactive({
   },
   series: [
     {
+      name: '能源利用率',
       type: 'bar',
       data: data.map(function (item) {
         return item.efficiency
@@ -210,6 +225,10 @@ const option6 = reactive({
     trigger: 'item',
     formatter: '{b}: {c} 千瓦时',
   },
+  legend: {
+    data: ['能源消耗量'],
+    x: 'left',
+  },
   xAxis: {
     type: 'value',
     axisLabel: {
@@ -267,86 +286,42 @@ function toggleFullScreen() {
 
 <template>
   <div class="energy-consumption-analysis">
-    <div class="title">
-      <div class="logo">
-        <img
-          :src="
-            appStore.darkMode == 'light'
-              ? getAssetsFile('images/logo1-blue.png')
-              : getAssetsFile('images/logo1-white.png')
-          "
-          alt=""
-        />
-      </div>
-      <div class="center">能源消耗情况诊断大屏</div>
-      <div class="right" style="font-size: 20px" @click="toggleFullScreen">
-        <Icon :icon="isFullScreen ? 'FullscreenExitOutlined' : 'FullscreenOutlined'" />
-      </div>
-    </div>
+    <a-space direction="vertical" size="large" style="width: 100%">
+      <i-card class="title" title="能源消耗情况诊断大屏">
+        <template #extra>
+          <div style="font-size: 20px; color: #1890ff; cursor: pointer" @click="toggleFullScreen">
+            <Icon :icon="isFullScreen ? 'FullscreenExitOutlined' : 'FullscreenOutlined'" />
+          </div>
+        </template>
+        <p>可视化分析能源消耗情况</p>
+      </i-card>
 
-    <div class="grid-container">
-      <i-card>
-        <i-charts :option="option1" />
-      </i-card>
-      <i-card>
-        <i-charts :option="option2" />
-      </i-card>
-      <i-card>
-        <i-charts :option="option3" />
-      </i-card>
-      <i-card>
-        <i-charts :option="option4" />
-      </i-card>
-      <i-card>
-        <i-charts :option="option5" />
-      </i-card>
-      <i-card>
-        <i-charts :option="option6" />
-      </i-card>
-    </div>
+      <div class="grid-container">
+        <i-card>
+          <i-charts :option="option1" />
+        </i-card>
+        <i-card>
+          <i-charts :option="option2" />
+        </i-card>
+        <i-card>
+          <i-charts :option="option3" />
+        </i-card>
+        <i-card>
+          <i-charts :option="option4" />
+        </i-card>
+        <i-card>
+          <i-charts :option="option5" />
+        </i-card>
+        <i-card>
+          <i-charts :option="option6" />
+        </i-card>
+      </div>
+    </a-space>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .energy-consumption-analysis {
-  .title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    height: 84px;
-
-    .logo {
-      display: flex;
-      opacity: 0;
-      justify-content: center;
-      align-items: center;
-      height: 64px;
-      margin: 16px;
-      //background: rgba(205, 205, 205, 0.3);
-      //background: url('@/assets/images/logo1.png') no-repeat left center;
-      //background-size: cover;
-      color: #000;
-
-      img {
-        height: 64px;
-        width: 100%;
-        object-fit: cover;
-        object-position: left center;
-      }
-    }
-
-    .center {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .right {
-      color: #1890ff;
-      cursor: pointer;
-    }
-  }
-
   .grid-container {
     --card-width: 600px;
     --card-height: 400px;
@@ -364,6 +339,7 @@ function toggleFullScreen() {
       --card-width: 400px;
       --card-height: 300px;
     }
+
     @media screen and (max-width: 1024px) {
       --card-width: 300px;
       --card-height: 250px;
