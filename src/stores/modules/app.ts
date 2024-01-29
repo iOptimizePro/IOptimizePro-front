@@ -12,8 +12,6 @@ import { syncAsyncRoute } from '@/router'
 export const useAppStore = defineStore(
   'app',
   () => {
-    // 主题名称
-    const themeName = ref<primaryColorEnumType>('origin')
     // 语言
     const locale = ref<'zhCN' | 'enUS'>('zhCN')
     const localeComp = computed(() => {
@@ -57,6 +55,8 @@ export const useAppStore = defineStore(
         }
       },
     })
+    // 主题名称
+    const themeName = ref<primaryColorEnumType>('origin')
     // 主题配置
     const borderRadius = ref(0)
     const themeConfig = computed(() => {
