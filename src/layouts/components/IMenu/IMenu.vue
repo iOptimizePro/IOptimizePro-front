@@ -66,7 +66,7 @@ defineProps<{
   :deep(.ant-menu-submenu-title) {
     box-sizing: border-box;
     height: 46px;
-    margin: 0;
+    margin: 3px 0;
     width: 100%;
   }
 

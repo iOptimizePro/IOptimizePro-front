@@ -217,39 +217,43 @@ onMounted(() => {
 
 <template>
   <div class="i-layout">
-    <a-layout>
-      <i-side
-        v-model:collapsed="menuConfig.collapsed"
-        v-model:selected-keys="menuConfig.selectedKeys"
-        v-model:open-keys="menuConfig.openKeys"
-        :collapsible="true"
-        :menu-list="menuConfig.menuList"
-        :width="menuConfig.hideSide ? 0 : menuConfig.sideWidth"
-      />
-      <a-layout class="i-layout__inner">
-        <i-header v-model:menu-collapsed="menuConfig.collapsed" v-model:open-drawer="menuConfig.openDrawer" />
-        <!--使用a-config-provider修改单个组件的样式 TODO-->
-        <a-config-provider :theme="tabConfig">
-          <!--页面切换的Tab栏-->
-          <a-tabs
-            v-model:active-key="menuConfig.selectedKeys[0]"
-            hideAdd
-            type="editable-card"
-            @change="handleTabChange"
-            @edit="handleTabEdit"
-          >
-            <template v-for="item in tabList" :key="item">
-              <a-tab-pane v-if="item" :key="item.path" :closable="tabList.length > 1" :tab="item.meta.title" />
-            </template>
-          </a-tabs>
-        </a-config-provider>
-        <a-layout-content>
-          <slot></slot>
-        </a-layout-content>
-        <a-layout-footer>
-          <div class="title">iOptimize 2023 Created by 智造前沿</div>
-          <div class="version">版本号：1.0.0</div>
-        </a-layout-footer>
+    <a-layout style="flex-direction: column">
+      <i-header v-model:menu-collapsed="menuConfig.collapsed" v-model:open-drawer="menuConfig.openDrawer" />
+      <a-layout style="gap: 1px">
+        <i-side
+          v-model:collapsed="menuConfig.collapsed"
+          v-model:selected-keys="menuConfig.selectedKeys"
+          v-model:open-keys="menuConfig.openKeys"
+          :collapsible="true"
+          :menu-list="menuConfig.menuList"
+          :width="menuConfig.hideSide ? 0 : menuConfig.sideWidth"
+          :show-logo="false"
+        />
+        <a-divider type="vertical" v-if="!menuConfig.hideSide" style="height: calc(100vh - 114px)" />
+        <a-layout class="i-layout__inner">
+          <!--使用a-config-provider修改单个组件的样式 TODO-->
+          <a-config-provider :theme="tabConfig">
+            <!--页面切换的Tab栏-->
+            <a-tabs
+              v-model:active-key="menuConfig.selectedKeys[0]"
+              hideAdd
+              type="editable-card"
+              @change="handleTabChange"
+              @edit="handleTabEdit"
+            >
+              <template v-for="item in tabList" :key="item">
+                <a-tab-pane v-if="item" :key="item.path" :closable="tabList.length > 1" :tab="item.meta.title" />
+              </template>
+            </a-tabs>
+          </a-config-provider>
+          <a-layout-content>
+            <slot></slot>
+          </a-layout-content>
+          <a-layout-footer>
+            <div class="title">iOptimize 2023 Created by 智造前沿</div>
+            <div class="version">版本号：1.0.0</div>
+          </a-layout-footer>
+        </a-layout>
       </a-layout>
     </a-layout>
 
@@ -267,6 +271,7 @@ onMounted(() => {
         :collapsible="false"
         :menu-list="menuConfig.menuList"
         :width="menuConfig.sideWidth"
+        :show-logo="true"
       />
     </a-drawer>
   </div>
@@ -279,7 +284,7 @@ onMounted(() => {
   .ant-layout {
     --footer-padding: 10px;
 
-    min-height: 100vh;
+    //min-height: 100vh;
     @include useTheme {
       background-color: getModeVar('bgColor');
     }
@@ -289,6 +294,11 @@ onMounted(() => {
         background-color: getModeVar('cardBgColor');
         color: getModeVar('infoColor');
       }
+    }
+
+    .i-layout__content {
+      display: flex;
+      max-height: calc(100vh - 64px);
     }
 
     .i-layout__inner {
@@ -317,8 +327,10 @@ onMounted(() => {
         text-align: center;
         //padding: var(--footer-padding) 5px;
         padding: calc(var(--footer-padding) + 5px) 10px;
-        //position: fixed;
-        //width: 100%;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100vw;
         display: flex;
         justify-content: space-between;
         align-items: center;

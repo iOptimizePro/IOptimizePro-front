@@ -3,6 +3,7 @@ import IBackground from '@/layouts/components/IBackground/IBackground.vue'
 import { ref, watch } from 'vue'
 import router from '@/router'
 import { useAppStore } from '@/stores'
+import { getAssetsFile } from '@/utils/utils'
 
 const appStore = useAppStore()
 // const mobile = ref(window.innerWidth < 768)
@@ -45,13 +46,19 @@ watch(
       <div class="i-auth-layout__header">
         <div class="i-auth-layout__header--left">
           <a href="/">
-            <img src="@/assets/images/logo1-blue.png" />
+            <img
+              :src="
+                appStore.darkMode == 'light'
+                  ? getAssetsFile('images/logo1-blue.png')
+                  : getAssetsFile('images/logo1-white.png')
+              "
+            />
           </a>
         </div>
         <div class="i-auth-layout__header--right">
           <div class="lang">
             <a-dropdown :trigger="['click']">
-              <a-button type="link">
+              <a-button type="text">
                 <Icon icon="GlobalOutlined" />
                 {{ $t('setting.language.title') }}
                 <Icon :size="10" icon="CaretDownOutlined" />
@@ -67,7 +74,7 @@ watch(
           <!--关闭登录界面的皮肤切换 TODO-->
           <div v-if="true" class="skin">
             <a-dropdown :trigger="['click']">
-              <a-button type="link">
+              <a-button type="text">
                 <Icon icon="SkinOutlined" />
                 {{ $t('setting.theme.title') }}
                 <Icon :size="10" icon="CaretDownOutlined" />
