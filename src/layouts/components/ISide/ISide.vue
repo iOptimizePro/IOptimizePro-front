@@ -9,6 +9,7 @@ const emit = defineEmits(['update:collapsed'])
 const props = defineProps<{
   collapsed?: boolean
   menuList: any[]
+  showLogo?: boolean
 }>()
 const propsCollapsed = useVModel(props, 'collapsed', emit)
 </script>
@@ -19,8 +20,9 @@ const propsCollapsed = useVModel(props, 'collapsed', emit)
     v-model:collapsed="propsCollapsed"
     :theme="appStore.darkMode || 'light'"
     class="i-side"
+    :style="showLogo ? {} : { height: 'calc(100vh - 114px)' }"
   >
-    <div class="i-side__logo">
+    <div v-if="showLogo" class="i-side__logo">
       <a href="/">
         <img
           :src="
@@ -37,7 +39,7 @@ const propsCollapsed = useVModel(props, 'collapsed', emit)
         />
       </a>
     </div>
-    <i-menu v-bind="$attrs" :menu-list="menuList" />
+    <i-menu v-bind="$attrs" :menu-list="menuList" :style="showLogo ? {} : { height: 'calc(100vh - 114px)' }"/>
   </a-layout-sider>
 </template>
 
@@ -48,11 +50,9 @@ const propsCollapsed = useVModel(props, 'collapsed', emit)
   overflow: auto;
   height: 100vh;
   box-sizing: border-box;
-  @include useTheme {
-    background: getModeVar('cardBgColor');
-    //box-shadow: 2px 0 6px getModeVar('boxShadowColor');
-  }
+  background: transparent;
   z-index: 99;
+  margin-left: 2px;
   //transition: width 0.3s;
 
   .i-side__logo {

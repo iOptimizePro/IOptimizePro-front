@@ -4,6 +4,7 @@ import IAvatar from '@/layouts/components/IAvatar/IAvatar.vue'
 import { useAppStore } from '@/stores'
 import IAlert from '@/layouts/components/IAlert/IAlert.vue'
 import { useVModel } from '@vueuse/core'
+import { getAssetsFile } from '@/utils/utils'
 
 const appStore = useAppStore()
 const emit = defineEmits(['update:openDrawer', 'update:menuCollapsed'])
@@ -17,10 +18,21 @@ const propsMenuCollapsed = useVModel(props, 'menuCollapsed', emit)
 </script>
 
 <template>
-  <!--TODO BEM命名待优化-->
-  <a-layout-header class="inner-layout-header">
-    <div class="header">
-      <div class="header-left">
+  <a-layout-header class="i-header">
+    <div class="i-header__inner">
+      <div class="i-header__inner--left">
+        <div class="i-header__logo">
+          <a href="/">
+            <img
+              :src="
+                appStore.darkMode == 'light'
+                  ? getAssetsFile('images/logo1-blue.png')
+                  : getAssetsFile('images/logo1-white.png')
+              "
+              alt=""
+            />
+          </a>
+        </div>
         <a-button class="menu-btn collapse-menu" type="text" @click="propsMenuCollapsed = !propsMenuCollapsed">
           <Icon icon="MenuOutlined" />
         </a-button>
@@ -32,10 +44,10 @@ const propsMenuCollapsed = useVModel(props, 'menuCollapsed', emit)
           <div class="title">{{ $t('app.title') }}</div>
         </div>
       </div>
-      <div class="header-right">
+      <div class="i-header__inner--right">
         <div class="lang">
           <a-dropdown :trigger="['click']">
-            <a-button type="link">
+            <a-button type="text">
               <Icon icon="GlobalOutlined" />
               {{ $t('setting.language.title') }}
               <Icon :size="10" icon="CaretDownOutlined" />
@@ -50,7 +62,7 @@ const propsMenuCollapsed = useVModel(props, 'menuCollapsed', emit)
         </div>
         <div class="skin">
           <a-dropdown :trigger="['click']">
-            <a-button type="link">
+            <a-button type="text">
               <Icon icon="SkinOutlined" />
               {{ $t('setting.theme.title') }}
               <Icon :size="10" icon="CaretDownOutlined" />
@@ -82,20 +94,49 @@ const propsMenuCollapsed = useVModel(props, 'menuCollapsed', emit)
 <style lang="scss" scoped>
 @import '@/styles/theme.scss';
 
-.inner-layout-header {
-  position: relative;
+.i-header {
   padding: 0 10px;
 
-  .header {
+  .i-header__inner {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    .header-left {
+    .i-header__inner--left {
       display: flex;
       align-items: center;
       justify-content: center;
+
+      .i-header__logo {
+        height: 100%;
+        //background: rgba(205, 205, 205, 0.3);
+        //background: url('@/assets/images/logo1.png') no-repeat left center;
+        //background-size: cover;
+        color: #000;
+
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
+
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          margin: 0 5px 0 10px;
+          @media screen and (max-width: 1280px) {
+            margin: 0 5px;
+          }
+
+          img {
+            height: 60px;
+            width: 100%;
+            object-fit: cover;
+            object-position: left center;
+          }
+        }
+      }
 
       .menu-btn {
         display: inline-block;
@@ -146,7 +187,7 @@ const propsMenuCollapsed = useVModel(props, 'menuCollapsed', emit)
       }
     }
 
-    .header-right {
+    .i-header__inner--right {
       display: flex;
       align-items: center;
 
