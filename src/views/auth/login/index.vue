@@ -128,7 +128,7 @@ nextTick(() => {
             </a-input>
           </a-col>
           <a-col :span="8" class="gutter-row">
-            <img :src="codeUrl" class="getCaptcha" style="cursor: pointer" @click="getCode" />
+            <img :src="codeUrl" class="getCaptcha" style="cursor: pointer; height: 30px" @click="getCode" />
           </a-col>
         </a-row>
       </a-form-item>

@@ -35,6 +35,15 @@ export const constantRouterMap = [
       },
     ],
   },
+  {
+    name: '404',
+    path: '/:pathMatch(.*)*',
+    hidden: true,
+    meta: {
+      title: '404',
+    },
+    component: () => import('@/views/exception/404.vue'),
+  },
 ]
 
 export interface IRouterMeta {
@@ -418,7 +427,7 @@ export function getAsyncRouterMap(): IRouter[] {
             title: '数据清洗',
             requireAuth: true,
           },
-          component: () => import('@/views/dashboard/index.vue'),
+          component: () => import('@/views/dataProcess/dataCleaning/index.vue'),
         },
         {
           name: '数据转换',
