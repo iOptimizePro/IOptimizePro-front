@@ -39,7 +39,7 @@ const propsCollapsed = useVModel(props, 'collapsed', emit)
         />
       </a>
     </div>
-    <i-menu v-bind="$attrs" :menu-list="menuList" :style="showLogo ? {} : { height: 'calc(100vh - 114px)' }"/>
+    <i-menu v-bind="$attrs" :menu-list="menuList" :style="showLogo ? {} : { height: 'calc(100vh - 114px)' }" />
   </a-layout-sider>
 </template>
 
