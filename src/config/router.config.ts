@@ -35,6 +35,15 @@ export const constantRouterMap = [
       },
     ],
   },
+  {
+    name: '404',
+    path: '/:pathMatch(.*)*',
+    hidden: true,
+    meta: {
+      title: '404',
+    },
+    component: () => import('@/views/exception/404.vue'),
+  },
 ]
 
 export interface IRouterMeta {
