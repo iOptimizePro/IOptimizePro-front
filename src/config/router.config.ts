@@ -427,7 +427,7 @@ export function getAsyncRouterMap(): IRouter[] {
             title: '数据清洗',
             requireAuth: true,
           },
-          component: () => import('@/views/dashboard/index.vue'),
+          component: () => import('@/views/dataProcess/dataCleaning/index.vue'),
         },
         {
           name: '数据转换',
