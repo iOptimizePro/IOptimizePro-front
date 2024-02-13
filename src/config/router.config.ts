@@ -654,5 +654,46 @@ export function getAsyncRouterMap(): IRouter[] {
         },
       ],
     },
+    {
+      name: '工具',
+      path: '/tools',
+      meta: {
+        icon: 'EditOutlined',
+        title: '工具',
+        requireAuth: true,
+      },
+      children: [
+        {
+          name: '图表',
+          path: '/charts',
+          meta: {
+            icon: 'EditOutlined',
+            title: '图表',
+            requireAuth: true,
+          },
+          component: () => import('@/views/tools/charts/index.vue'),
+        },
+        {
+          name: '编辑器',
+          path: '/editor',
+          meta: {
+            icon: 'EditOutlined',
+            title: '编辑器',
+            requireAuth: true,
+          },
+          component: () => import('@/views/tools/editor/index.vue'),
+        },
+        {
+          name: '大屏',
+          path: '/largeScreen',
+          meta: {
+            icon: 'EditOutlined',
+            title: '大屏',
+            requireAuth: true,
+          },
+          component: () => import('@/views/tools/largeScreen/index.vue'),
+        },
+      ],
+    },
   ]
 }

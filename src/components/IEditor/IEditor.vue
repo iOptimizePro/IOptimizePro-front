@@ -20,9 +20,13 @@ const props = defineProps({
   options: {
     type: Object,
     default: () => ({
-      automaticLayout: true,
-      formatOnType: true,
-      formatOnPaste: true,
+      // automaticLayout: true,
+      // formatOnType: true,
+      // formatOnPaste: true,
+      lineNumbersMinChars: 3,
+      minimap: {
+        enabled: false,
+      },
     }),
   },
 })

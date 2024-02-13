@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { shallowRef } from 'vue'
 import { useVModel } from '@vueuse/core'
+
 const emit = defineEmits(['update:originalCode', 'update:modifiedCode'])
 defineExpose({ getOriginalValue, getModifiedValue })
 const props = defineProps({
@@ -23,10 +24,14 @@ const props = defineProps({
   options: {
     type: Object,
     default: () => ({
-      automaticLayout: true,
-      formatOnType: true,
-      formatOnPaste: true,
+      // automaticLayout: true,
+      // formatOnType: true,
+      // formatOnPaste: true,
       readOnly: true,
+      lineNumbersMinChars: 3,
+      minimap: {
+        enabled: false,
+      },
     }),
   },
 })

@@ -26,7 +26,7 @@ app.use(VueTransitions, {
 app.use(VueMonacoEditorPlugin, {
   paths: {
     // The recommended CDN config
-    vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs',
+    vs: 'https://cdn.staticfile.net/monaco-editor/0.45.0/min/vs',
   },
 })
 app.component(Icon)
